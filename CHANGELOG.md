@@ -2,12 +2,25 @@
 # RxDB Changelog
 
 <!-- CHANGELOG NEWEST -->
-- FIX RxState.property$ should emit stable reference [#6462](https://github.com/pubkey/rxdb/pull/6462)
+
 <!-- ADD new changes here! -->
 
 <!-- /CHANGELOG NEWEST -->
 
 <!-- RELEASE BELOW -->
+
+### 15.36.1 (16 October 2024)
+
+- ADD SQLite RxStorage support for Expo SDK 51 with the async API `getSQLiteBasicsExpoSQLiteAsync()`
+
+### 15.36.0 (16 October 2024)
+
+- ADD option to define the RxDB Premium token in an `.env` file
+
+### 15.35.0 (15 October 2024)
+
+- 🆕📢 New Article: [LocalStorage vs. IndexedDB vs. Cookies vs. OPFS vs. WASM-SQLite](https://rxdb.info/articles/localstorage-indexeddb-cookies-opfs-sqlite-wasm.html)
+- FIX RxState.property$ should emit stable reference [#6462](https://github.com/pubkey/rxdb/pull/6462)
 
 ### 15.34.1 (2 October 2024)
 

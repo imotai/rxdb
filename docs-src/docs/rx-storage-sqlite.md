@@ -142,7 +142,51 @@ const storage = getRxStorageSQLite({
 });
 ```
 
+## Usage with **Expo SQLite**
 
+Notice that [expo-sqlite](https://www.npmjs.com/package/expo-sqlite) cannot be used on android (but it works on iOS) if you use Expo SDK version 50 or older. Please update to Version 50 or newer to use it.
+
+In the latest expo SDK version, use the `getSQLiteBasicsExpoSQLiteAsync()` method:
+
+```ts
+import {
+    createRxDatabase
+} from 'rxdb';
+import {
+    getRxStorageSQLite,
+    getSQLiteBasicsExpoSQLiteAsync
+} from 'rxdb-premium/plugins/storage-sqlite';
+import * as SQLite from 'expo-sqlite';
+
+const myRxDatabase = await createRxDatabase({
+    name: 'exampledb',
+    multiInstance: false,
+    storage: getRxStorageSQLite({
+        sqliteBasics: getSQLiteBasicsExpoSQLiteAsync(SQLite.openDatabaseAsync)
+    })
+});
+```
+
+In older Expo SDK versions, you might have to use the non-async API:
+
+```ts
+import {
+    createRxDatabase
+} from 'rxdb';
+import {
+    getRxStorageSQLite,
+    getSQLiteBasicsExpoSQLite
+} from 'rxdb-premium/plugins/storage-sqlite';
+import { openDatabase } from 'expo-sqlite';
+
+const myRxDatabase = await createRxDatabase({
+    name: 'exampledb',
+    multiInstance: false,
+    storage: getRxStorageSQLite({
+        sqliteBasics: getSQLiteBasicsExpoSQLite(openDatabase)
+    })
+});
+```
 
 ## Usage with **SQLite Capacitor**
 
@@ -219,8 +263,6 @@ getDatabaseConnection(
 - Some JavaScript runtimes do not contain a `Buffer` API which is used by SQLite to store binary attachments data as `BLOB`. You can set `storeAttachmentsAsBase64String: true` if you want to store the attachments data as base64 string instead. This increases the database size but makes it work even without having a `Buffer`.
 
 - The SQlite RxStorage works on SQLite libraries that use SQLite in version `3.38.0 (2022-02-22)` or newer, because it uses the [SQLite JSON](https://www.sqlite.org/json1.html) methods like `JSON_EXTRACT`. If you get an error like `[Error: no such function: JSON_EXTRACT (code 1 SQLITE_ERROR[1])`, you might have a too old version of SQLite.
-
-- [expo-sqlite](https://www.npmjs.com/package/expo-sqlite) cannot be used on android (but it works on iOS) because it uses an [outdated SQLite version](https://expo.canny.io/feature-requests/p/expo-sqlite-ship-newer-sqlite3-version-on-android). This is fixed if you use Expo SDK version 50 or never.
 
 - To debug all SQL operations, you can pass a log function to `getRxStorageSQLite()` like this:
 ```ts
