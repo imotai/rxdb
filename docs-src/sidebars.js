@@ -23,6 +23,11 @@ const sidebars = {
       label: 'Getting Started with RxDB',
       collapsed: false,
       items: [
+        {
+          type: 'doc',
+          id: 'overview',
+          label: 'Overview'
+        },
         'quickstart',
         'install',
         'dev-mode',
@@ -495,7 +500,8 @@ const sidebars = {
         'articles/firestore-alternative',
         'articles/firebase-realtime-database-alternative',
         'articles/offline-database',
-        'articles/zero-latency-local-first'
+        'articles/zero-latency-local-first',
+        'articles/indexeddb-max-storage-limit'
       ],
     },
     'contribute',
