@@ -1,17 +1,17 @@
 import { randomOfArray } from '../../../plugins/utils';
 import { ScrollToSection, SemPage } from '../pages';
-import { HeroSection_A } from './hero-section/T4_hero_a';
 import { HeroSection_B } from './hero-section/T4_hero_b';
-import { HeroSection_C } from './hero-section/T4_hero_c';
-import { HeroSection_D } from './hero-section/T4_hero_d';
+// import { HeroSection_A } from './hero-section/T4_hero_a';
+// import { HeroSection_C } from './hero-section/T4_hero_c';
+// import { HeroSection_D } from './hero-section/T4_hero_d';
 
 const CURRENT_TEST_RUN = {
-    id: 'T4', // test hero page content type
+    id: 'TX', // test hero page content type
     variations: {
-        A: HeroSection_A,
+        // A: HeroSection_A,
         B: HeroSection_B,
-        C: HeroSection_C,
-        D: HeroSection_D
+        // C: HeroSection_C,
+        // D: HeroSection_D
     }
 };
 
