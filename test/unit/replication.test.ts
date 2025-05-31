@@ -18,7 +18,8 @@ import {
     humansCollection,
     isFastMode,
     ensureReplicationHasNoErrors,
-    randomStringWithSpecialChars
+    randomStringWithSpecialChars,
+    isDeno
 } from '../../plugins/test-utils/index.mjs';
 
 import {
@@ -459,7 +460,7 @@ describe('replication.test.ts', () => {
             const replicationState = replicateRxCollection({
                 collection: localCollection,
                 replicationIdentifier: REPLICATION_IDENTIFIER_TEST,
-                live: false,
+                live: true,
                 pull: {
                     handler: async () => {
                         await wait(0);
@@ -483,15 +484,15 @@ describe('replication.test.ts', () => {
             await wait(isFastMode() ? 200 : 500);
             assert.strictEqual(hasResolved, false);
 
-            localCollection.database.close();
-            remoteCollection.database.close();
+            await localCollection.database.close();
+            await remoteCollection.database.close();
         });
         it('should never resolve awaitInitialReplication() on canceled replication', async () => {
             const { localCollection, remoteCollection } = await getTestCollections({ local: 10, remote: 10 });
             const replicationState = replicateRxCollection({
                 collection: localCollection,
                 replicationIdentifier: REPLICATION_IDENTIFIER_TEST,
-                live: false,
+                live: true,
                 retryTime: 100,
                 autoStart: true,
                 pull: {
@@ -707,7 +708,7 @@ describe('replication.test.ts', () => {
                 const replicationState = replicateRxCollection({
                     collection: localCollection,
                     replicationIdentifier: REPLICATION_IDENTIFIER_TEST,
-                    live: false,
+                    live: true,
                     pull: {
                         handler: getPullHandler(remoteCollection)
                     },
@@ -726,7 +727,7 @@ describe('replication.test.ts', () => {
                 const replicationState = replicateRxCollection({
                     collection: localCollection,
                     replicationIdentifier: REPLICATION_IDENTIFIER_TEST,
-                    live: false,
+                    live: true,
                     pull: {
                         handler: async () => {
                             await wait(100);
@@ -930,6 +931,63 @@ describe('replication.test.ts', () => {
             localCollection.database.close();
             remoteCollection.database.close();
         });
+        it('should not crash when calling remove directly after start (without await)', async () => {
+            const { localCollection, remoteCollection } = await getTestCollections({ local: 1, remote: 1 });
+            const calledCheckpoints: any[] = [];
+            const startReplication = () => {
+                const replicationState = replicateRxCollection({
+                    collection: localCollection,
+                    replicationIdentifier: REPLICATION_IDENTIFIER_TEST,
+                    autoStart: false,
+                    live: true,
+                    pull: {
+                        handler: (checkpoint, batchSize) => {
+                            calledCheckpoints.push(checkpoint);
+                            return getPullHandler(remoteCollection)(checkpoint, batchSize);
+                        },
+                    },
+                    push: {
+                        handler: getPushHandler(remoteCollection),
+                    }
+                });
+                return replicationState;
+            };
+
+            const currentReplicationState = await startReplication();
+            currentReplicationState.start();
+            await currentReplicationState.remove();
+
+            localCollection.database.close();
+            remoteCollection.database.close();
+        });
+        it('should not crash when calling remove directly after start (with await)', async () => {
+            const { localCollection, remoteCollection } = await getTestCollections({ local: 1, remote: 1 });
+            const calledCheckpoints: any[] = [];
+            const startReplication = () => {
+                const replicationState = replicateRxCollection({
+                    collection: localCollection,
+                    replicationIdentifier: REPLICATION_IDENTIFIER_TEST,
+                    autoStart: false,
+                    live: true,
+                    pull: {
+                        handler: (checkpoint, batchSize) => {
+                            calledCheckpoints.push(checkpoint);
+                            return getPullHandler(remoteCollection)(checkpoint, batchSize);
+                        },
+                    },
+                    push: {
+                        handler: getPushHandler(remoteCollection),
+                    }
+                });
+                return replicationState;
+            };
+            const currentReplicationState = await startReplication();
+            await currentReplicationState.start();
+            await currentReplicationState.remove();
+
+            localCollection.database.close();
+            remoteCollection.database.close();
+        });
     });
     describeParallel('attachment replication', () => {
         if (!config.storage.hasAttachments) {
@@ -1088,6 +1146,149 @@ describe('replication.test.ts', () => {
         });
     });
     describeParallel('issues', () => {
+        it('#7187 real-time query ignoring the latest changes after deleting and purging data', async () => {
+            if (
+                config.storage.name.includes('random-delay') ||
+                isDeno
+            ) {
+                return;
+            }
+            const batches = [
+                [
+                    { id: 'foobar', firstName: 'name1' },
+                    { id: 'foobar2', firstName: 'name2' }
+                ]
+            ];
+
+            // create a schema
+            const mySchema = {
+                version: 0,
+                primaryKey: 'id',
+                type: 'object',
+                properties: {
+                    id: {
+                        type: 'string',
+                        maxLength: 100
+                    },
+                    firstName: {
+                        type: 'string'
+                    }
+                }
+            };
+
+            /**
+             * Always generate a random database-name
+             * to ensure that different test runs do not affect each other.
+             */
+            const name = randomToken(10);
+
+            // create a database
+            let db = await createDatabase();
+
+            // Start replication, wait until it's done
+            const firstRep = await createReplication();
+            await firstRep.awaitInitialReplication();
+
+            // Close the database and recreate it
+            await db.close();
+            db = await createDatabase();
+
+            await db.mycollection.find().remove();
+            await db.mycollection.cleanup(0); // If we comment out this line, the test will pass
+
+            const secondRep = await createReplication(false);
+            await secondRep.start();
+            await secondRep.remove();
+
+            // Re-create replication and wait until it's done
+            let items: any[] = [];
+            const itemsQuery = await db.mycollection.find();
+            itemsQuery.$.subscribe(docs => {
+                const mutableDocs = docs.map(doc => doc.toMutableJSON());
+                items = mutableDocs;
+            });
+
+            const thirdRep = await createReplication();
+            await thirdRep.awaitInSync();
+
+            // Add a new batch that represents a document update in the database
+            batches.push([
+                { id: 'foobar', firstName: 'MODIFIED' },
+            ]);
+
+            // Resync and wait until it's done
+            await thirdRep.reSync();
+            await thirdRep.awaitInSync();
+            await wait(50);
+
+            const newQueryResult = await db.mycollection.find({ selector: { id: { $ne: randomToken(10) } } }).exec();
+            assert.deepStrictEqual(
+                newQueryResult.map(d => d.toJSON()),
+                [
+                    {
+                        id: 'foobar',
+                        firstName: 'MODIFIED'
+                    },
+                    {
+                        id: 'foobar2',
+                        firstName: 'name2'
+                    }
+                ],
+                'uncached query result must know about MODIFIED'
+            );
+
+            // THIS FAILS !!!
+            assert.strictEqual(items.find(item => item.id === 'foobar').firstName, 'MODIFIED', 'should have found the modified item');
+            assert.strictEqual(items.length, 2);
+
+            // clean up afterwards
+            db.close();
+
+            function createReplication(autoStart = true) {
+                const replicationState = replicateRxCollection<any, { index: number; }>({
+                    replicationIdentifier: name + 'test-replication',
+                    collection: db.mycollection,
+                    autoStart,
+                    pull: {
+                        batchSize: 3,
+                        handler: async (checkpoint) => {
+                            await wait(10);
+                            const index = checkpoint?.index ?? 0;
+                            const batchDocs = batches[index];
+                            return {
+                                documents: batchDocs || [],
+                                checkpoint: batchDocs ? { index: index + 1 } : checkpoint as any,
+                            };
+                        }
+                    },
+                });
+                ensureReplicationHasNoErrors(replicationState);
+                return replicationState;
+            }
+
+            async function createDatabase() {
+                const database = await createRxDatabase({
+                    name,
+                    /**
+                     * By calling config.storage.getStorage(),
+                     * we can ensure that all variations of RxStorage are tested in the CI.
+                     */
+                    storage: config.storage.getStorage(),
+                    cleanupPolicy: {
+                        minimumDeletedTime: 0,
+                    },
+                    localDocuments: true,
+                });
+
+                // create a collection
+                await database.addCollections({
+                    mycollection: {
+                        schema: mySchema
+                    }
+                });
+                return database;
+            }
+        });
         it('upstreamInitialSync() running on all data instead of continuing from checkpoint', async () => {
             const { localCollection, remoteCollection } = await getTestCollections({
                 local: 0,
