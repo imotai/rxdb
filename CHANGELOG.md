@@ -2,12 +2,22 @@
 # RxDB Changelog
 
 <!-- CHANGELOG NEWEST -->
-
+- ADD option to remove and update a document in the same atomic write operation.
+- ADD option to disable `WITHOUT ROWID` in the SQLite RxStorage.
+- FIX db.addCollections fails after it failed for a missing migration strategy [#7226](https://github.com/pubkey/rxdb/pull/7226)
+- FIX SQLite storage fails while querying with null [#7236](https://github.com/pubkey/rxdb/pull/7236)
 <!-- ADD new changes here! -->
 
 <!-- /CHANGELOG NEWEST -->
 
 <!-- RELEASE BELOW -->
+
+### 16.13.0 (30 May 2025)
+
+- FIX queue start/stop/cancel operations in the replication state to ensure operations do not intersect and cause errors.
+- FIX real-time query ignoring the latest changes after deleting and purging data [#7187](https://github.com/pubkey/rxdb/pull/7187)
+- ADD `putAttachmentBase64()` and `getDataBase64()` to the attachments API so that attachments can be stored and read in runtimes that do not support `Blob`.
+- FIX schema migration failing when returning null [#7204](https://github.com/pubkey/rxdb/pull/7204)
 
 ### 16.12.0 (10 May 2025)
 
