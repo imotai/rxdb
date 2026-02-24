@@ -16,7 +16,7 @@ const CURRENT_TEST_RUN = {
     /**
      * @link https://docs.google.com/spreadsheets/d/1ryPOhhwFHIqkVnIlpup6neV7u1FDnPMTlgzbvE62kB8/edit?gid=1330239462#gid=1330239462
      */
-    id: 'T11',
+    id: 'TX',
     variations: {
         A: <>The easiest way to <b>store</b> and <b>sync</b> Data inside of your App</>,
         B: <>The local-first <b>Database</b> for <b>JavaScript</b> Applications</>,
@@ -108,8 +108,8 @@ export function getTestGroupEventPrefix() {
             'abt',
             CURRENT_TEST_RUN.id,
             'O:' + tg.originId,
+            'D:' + tg.deviceType,
             'V:' + tg.variation,
-            'D:' + tg.deviceType
         ].join('_');
     }
 }

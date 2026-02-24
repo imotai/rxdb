@@ -314,7 +314,7 @@ function triggerClickEventWhenFromCode() {
         return;
     }
     triggerTrackingEvent(TRIGGER_CONSOLE_EVENT_ID, 10, 1);
-    triggerTrackingEvent(TRIGGER_CONSOLE_EVENT_ID + '_' + urlParams.get('console'), 10);
+    triggerTrackingEvent(TRIGGER_CONSOLE_EVENT_ID + '_' + urlParams.get('console'), 10, 1);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

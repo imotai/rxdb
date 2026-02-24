@@ -12,7 +12,6 @@ import { ReplicationDiagram } from '../replication-diagram';
 import { VideoModal } from '../video-box';
 import { YOUTUBE_VIDEO_MAIN } from '../video-section';
 import { VideoPlayButtonArrow } from '../video-button';
-import { ABTestContent } from '../a-b-tests';
 
 export function HeroSection_B(props: {
     sem?: SemPage;
@@ -38,7 +37,7 @@ export function HeroSection_B(props: {
                 textAlign: 'center',
             }}>
                 {
-                    props.sem ? props.sem.title : <ABTestContent></ABTestContent>
+                    props.sem ? props.sem.title : <>The Local-First <b>Database</b> for <b>JavaScript</b> Apps</>
                 }
             </h1>
             <div className="inner">

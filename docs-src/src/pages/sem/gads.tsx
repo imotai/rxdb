@@ -1,4 +1,3 @@
-import { ABTestContent } from '@site/src/components/a-b-tests';
 import Home from '..';
 
 
@@ -11,7 +10,7 @@ export default function Page() {
         sem: {
             id: 'gads',
             metaTitle: 'The local Database for Apps',
-            title: <ABTestContent></ABTestContent>
+            title: <>The Local-First <b>Database</b> for <b>JavaScript</b> Apps</>
             // title: <>The easiest way to <b>store</b> and <b>sync</b> Data inside of your App</>,
         }
     });
