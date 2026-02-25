@@ -1203,43 +1203,38 @@ export const ERROR_MESSAGES = {
         message: 'Google Drive: folderPath must not be the root folder or undefined',
         cause: 'You provided "/" or "root" or "" as folderPath.',
         fix: 'Use a specific subfolder to ensure RxDB data does not mess up the users drive files.',
-        docs: 'https://rxdb.info/replication-google-drive.html'
+        docs: 'https://rxdb.info/replication-google-drive.html?console=errors&code=GDR1'
     },
     GDR3: {
         message: 'Google Drive: Folder already exists but is not a folder',
         cause: 'A file with the same name already exists, but is not a folder',
         fix: 'Rename the file or the folder you are trying to create.',
-        docs: 'https://rxdb.info/replication-google-drive.html'
+        docs: 'https://rxdb.info/replication-google-drive.html?console=errors&code=GDR3'
     },
     GDR9: {
         message: 'Google Drive: folder has content but is not a rxdb sync target',
         cause: 'You selected a folder that is not empty but is not a rxdb sync target.',
         fix: 'Provide empty folder or use a different folder that is not used for anything else.',
-        docs: 'https://rxdb.info/replication-google-drive.html'
+        docs: 'https://rxdb.info/replication-google-drive.html?console=errors&code=GDR9'
     },
-   
     GDR11: {
         message: 'Google Drive: could not close transaction',
         cause: '',
         fix: '',
-        docs: 'https://rxdb.info/replication-google-drive.html'
+        docs: 'https://rxdb.info/replication-google-drive.html?console=errors&code=GDR11'
     },
     GDR18: {
         message: 'Max batch size exxeeded for google drive sync',
         cause: '',
         fix: 'Reduce the batchSize to be lower',
-        docs: 'https://rxdb.info/replication-google-drive.html'
+        docs: 'https://rxdb.info/replication-google-drive.html?console=errors&code=GDR18'
     },
     GDR19: {
         message: 'WAL file write conflict',
         cause: 'Someone else has written to the wal file in between our transaction. This should not happen.',
         fix: 'Try to reproduce the error in a unit test and make a PR with a test case.',
-        docs: 'https://rxdb.info/replication-google-drive.html'
+        docs: 'https://rxdb.info/replication-google-drive.html?console=errors&code=GDR19'
     },
-
-
-
-
 
 
     FETCH: {
