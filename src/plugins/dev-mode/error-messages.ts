@@ -1224,36 +1224,6 @@ export const ERROR_MESSAGES = {
         fix: '',
         docs: 'https://rxdb.info/replication-google-drive.html'
     },
-    GDR13: {
-        message: 'Drive insertDocumentFiles failed',
-        cause: '',
-        fix: '',
-        docs: 'https://rxdb.info/replication-google-drive.html'
-    },
-    GDR14: {
-        message: 'Drive updateDocumentFiles failed',
-        cause: '',
-        fix: '',
-        docs: 'https://rxdb.info/replication-google-drive.html'
-    },
-    GDR15: {
-        message: 'Drive updateDocumentFiles failed',
-        cause: '',
-        fix: '',
-        docs: 'https://rxdb.info/replication-google-drive.html'
-    },
-    GDR16: {
-        message: 'Drive batchFetchDocumentContentsRaw failed',
-        cause: '',
-        fix: '',
-        docs: 'https://rxdb.info/replication-google-drive.html'
-    },
-    GDR17: {
-        message: 'Drive fetchDocumentContents failed',
-        cause: '',
-        fix: '',
-        docs: 'https://rxdb.info/replication-google-drive.html'
-    },
     GDR18: {
         message: 'Max batch size exxeeded for google drive sync',
         cause: '',
