@@ -41,15 +41,9 @@ export async function createFolder(
             return ensureNotFalsy(found);
         }
 
-        throw newRxError('GDR6', {
+        throw await newRxFetchError(response, {
             folderName,
-            args: {
-                call: 'createFolder',
-                parentId,
-                status: response.status,
-                statusText: response.statusText,
-                body: errorText
-            }
+            parentId
         });
     }
 
@@ -152,14 +146,8 @@ export async function createEmptyFile(
      * and return that one.
      */
     if (!response.ok && response.status !== 409) {
-        throw newRxError('GDR6', {
-            folderName: fileName,
-            args: {
-                asdf: 'asdf',
-                status: response.status,
-                statusText: response.statusText,
-                body: await response.text()
-            }
+        throw await newRxFetchError(response, {
+            folderName: fileName
         });
     }
 
@@ -384,12 +372,8 @@ export async function readFolder(
     });
 
     if (!listResponse.ok) {
-        throw newRxError('GDR6', {
-            folderName: folderPath,
-            args: {
-                status: listResponse.status,
-                statusText: listResponse.statusText
-            }
+        throw await newRxFetchError(listResponse, {
+            folderName: folderPath
         });
     }
 

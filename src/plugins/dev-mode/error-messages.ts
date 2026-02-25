@@ -1203,103 +1203,68 @@ export const ERROR_MESSAGES = {
         message: 'Google Drive: folderPath must not be the root folder or undefined',
         cause: 'You provided "/" or "root" or "" as folderPath.',
         fix: 'Use a specific subfolder to ensure RxDB data does not mess up the users drive files.',
-        docs: ''
-    },
-    GDR2: {
-        message: 'Google Drive: Folder already exists but is in trash',
-        cause: 'The folder you are trying to create or access is in the trash.',
-        fix: 'Restore the folder from trash or delete it permanently.',
-        docs: ''
+        docs: 'https://rxdb.info/replication-google-drive.html'
     },
     GDR3: {
         message: 'Google Drive: Folder already exists but is not a folder',
         cause: 'A file with the same name already exists, but is not a folder',
         fix: 'Rename the file or the folder you are trying to create.',
-        docs: ''
-    },
-    GDR4: {
-        message: 'Google Drive: Parent folder does not exist in the path hierarchy',
-        cause: 'One of the parent folders in the path does not exist.',
-        fix: 'Ensure the full path structure is correct.',
-        docs: ''
-    },
-    GDR5: {
-        message: 'Google Drive: Conflict (409) detected but folder could not be found after reconciliation retries',
-        cause: 'Concurrent creation failed and the folder is not visible yet.',
-        fix: 'Check for high concurrency or eventually consistency issues.',
-        docs: ''
-    },
-    GDR6: {
-        message: 'Google Drive: Failed to create file or folder',
-        cause: 'The Google Drive API returned an error.',
-        fix: 'Check the error details.',
-        docs: ''
+        docs: 'https://rxdb.info/replication-google-drive.html'
     },
     GDR9: {
         message: 'Google Drive: folder has content but is not a rxdb sync target',
         cause: 'You selected a folder that is not empty but is not a rxdb sync target.',
         fix: 'Provide empty folder or use a different folder that is not used for anything else.',
-        docs: ''
+        docs: 'https://rxdb.info/replication-google-drive.html'
     },
-    GDR10: {
-        message: 'Google Drive: could not delete the file',
-        cause: '',
-        fix: '',
-        docs: ''
-    },
+   
     GDR11: {
         message: 'Google Drive: could not close transaction',
         cause: '',
         fix: '',
-        docs: ''
-    },
-    GDR12: {
-        message: 'Drive files.list failed',
-        cause: '',
-        fix: '',
-        docs: ''
+        docs: 'https://rxdb.info/replication-google-drive.html'
     },
     GDR13: {
         message: 'Drive insertDocumentFiles failed',
         cause: '',
         fix: '',
-        docs: ''
+        docs: 'https://rxdb.info/replication-google-drive.html'
     },
     GDR14: {
         message: 'Drive updateDocumentFiles failed',
         cause: '',
         fix: '',
-        docs: ''
+        docs: 'https://rxdb.info/replication-google-drive.html'
     },
     GDR15: {
         message: 'Drive updateDocumentFiles failed',
         cause: '',
         fix: '',
-        docs: ''
+        docs: 'https://rxdb.info/replication-google-drive.html'
     },
     GDR16: {
         message: 'Drive batchFetchDocumentContentsRaw failed',
         cause: '',
         fix: '',
-        docs: ''
+        docs: 'https://rxdb.info/replication-google-drive.html'
     },
     GDR17: {
         message: 'Drive fetchDocumentContents failed',
         cause: '',
         fix: '',
-        docs: ''
+        docs: 'https://rxdb.info/replication-google-drive.html'
     },
     GDR18: {
         message: 'Max batch size exxeeded for google drive sync',
         cause: '',
         fix: 'Reduce the batchSize to be lower',
-        docs: ''
+        docs: 'https://rxdb.info/replication-google-drive.html'
     },
     GDR19: {
         message: 'WAL file write conflict',
         cause: 'Someone else has written to the wal file in between our transaction. This should not happen.',
         fix: 'Try to reproduce the error in a unit test and make a PR with a test case.',
-        docs: ''
+        docs: 'https://rxdb.info/replication-google-drive.html'
     },
 
 

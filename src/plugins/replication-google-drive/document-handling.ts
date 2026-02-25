@@ -43,11 +43,8 @@ export async function getDocumentFiles(
     });
 
     if (!res.ok) {
-        const text = await res.text().catch(() => "");
-        throw newRxError('GDR12', {
+        throw await newRxFetchError(res, {
             ids: docIds,
-            status: res.status,
-            errorText: text
         });
     }
 
@@ -83,8 +80,7 @@ export async function batchGetFilesMetadata(
     });
 
     if (!res.ok) {
-        const text = await res.text().catch(() => "");
-        throw newRxError("GDR18", { status: res.status, errorText: text });
+        throw await newRxFetchError(res);
     }
 
     // multipart/mixed; you can parse it, or just return raw.
