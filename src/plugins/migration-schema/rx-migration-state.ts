@@ -84,7 +84,12 @@ export class RxMigrationState {
     public readonly mustMigrate: ReturnType<typeof mustMigrate>;
     public readonly statusDocId: string;
     public readonly $: Observable<RxMigrationStatus>;
-    public replicationState?: RxStorageInstanceReplicationState<any>;
+
+    /**
+     * Contains ALL replication states
+     * that are ever used in this migration state.
+     */
+    public replicationStates = new Set<RxStorageInstanceReplicationState<any>>();
     public canceled: boolean = false;
     public broadcastChannel?: BroadcastChannel;
     constructor(
@@ -459,7 +464,7 @@ export class RxMigrationState {
             conflictHandler: defaultConflictHandler,
             hashFunction: this.database.hashFunction
         });
-
+        this.replicationStates.add(replicationState);
 
         let hasError: RxError | RxTypeError | false = false;
         replicationState.events.error.subscribe(err => hasError = err);
@@ -477,6 +482,7 @@ export class RxMigrationState {
 
         await this.updateStatusQueue;
         if (hasError) {
+            await cancelRxStorageReplication(replicationState);
             await replicationMetaStorageInstance.close();
             throw hasError;
         }
@@ -487,7 +493,7 @@ export class RxMigrationState {
             replicationMetaStorageInstance.remove()
         ]);
 
-        await this.cancel();
+        await cancelRxStorageReplication(replicationState);
     }
 
     /**
@@ -497,9 +503,10 @@ export class RxMigrationState {
      */
     public async cancel() {
         this.canceled = true;
-        if (this.replicationState) {
-            await cancelRxStorageReplication(this.replicationState);
-        }
+        await Promise.all(
+            Array.from(this.replicationStates.values())
+                .map(state => cancelRxStorageReplication(state))
+        );
         if (this.broadcastChannel) {
             await this.broadcastChannel.close();
         }
@@ -585,7 +592,7 @@ export class RxMigrationState {
 
 
     async migratePromise(batchSize?: number): Promise<RxMigrationStatus> {
-        this.startMigration(batchSize).catch(() => {});
+        this.startMigration(batchSize).catch(() => { });
         const must = await this.mustMigrate;
         if (!must) {
             return {
