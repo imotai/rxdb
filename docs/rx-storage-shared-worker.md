@@ -14,7 +14,7 @@ This plugin is part of [RxDB Premium 👑](/premium/). It is not part of the def
 
 ### On the SharedWorker process
 
-In the worker process JavaScript file, you have wrap the original RxStorage with `getRxStorageIndexedDB()`.
+In the worker process JavaScript file, you have to wrap the original RxStorage with `getRxStorageIndexedDB()`.
 
 ```ts
 // shared-worker.ts
@@ -22,7 +22,7 @@ In the worker process JavaScript file, you have wrap the original RxStorage with
 import { exposeWorkerRxStorage } from 'rxdb-premium/plugins/storage-worker';
 import { 
     getRxStorageIndexedDB
-} from 'rxdb-premium/plugins/indexeddb';
+} from 'rxdb-premium/plugins/storage-indexeddb';
 
 exposeWorkerRxStorage({
     /**
@@ -136,7 +136,7 @@ exposeWorkerRxStorage({
 });
 
 /**
- * Then create a normal RxDatabase and RxCollections
+ * Then create a normal RxDatabase and [RxCollections](./rx-collection.md)
  * and start the replication.
  */
 const database = await createRxDatabase({

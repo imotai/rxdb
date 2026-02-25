@@ -55,12 +55,12 @@ import {
     getRxStorageIndexedDB
 } from 'rxdb-premium/plugins/storage-indexeddb';
 
-let storage = getRxStorageDexie();
+let storage = getRxStorageIndexedDB();
 ```
 
 #### Dexie.js
 
-[Dexie.js](./rx-storage-dexie.md) is a friendly wrapper around IndexedDB and is a great default for browser apps when you don’t use premium. It’s reliable, works well for medium-sized datasets, and is free to use.
+[Dexie.js](./rx-storage-dexie.md) is a friendly wrapper around IndexedDB and is a great default for browser apps when you don't use premium. It's reliable, works well for medium-sized datasets, and is free to use.
 
 ```ts
 import {
@@ -117,8 +117,8 @@ There are many more storages such as [MongoDB](./rx-storage-mongodb.md), [DenoKV
         RxDB provides a wide range of storages depending on your JavaScript runtime and performance needs.
         
     In the Browser: Use the LocalStorage storage for simple setup and small build size. For bigger datasets, use either the dexie.js storage (free) or the IndexedDB RxStorage if you have 👑 premium access which is a bit faster and has a smaller build size.
-    In Electron and ReactNative: Use the SQLite RxStorage if you have 👑 premium access or the trial-SQLite RxStorage for tryouts.
-    In Capacitor: Use the SQLite RxStorage if you have 👑 premium access, otherwise use the localStorage storage.
+    In Electron and React Native: Use the SQLite RxStorage if you have 👑 premium access or the SQLite Trial RxStorage for tryouts.
+    In Capacitor: Use the SQLite RxStorage if you have 👑 premium access, otherwise use the LocalStorage storage.
 
     
 </details>
@@ -193,7 +193,7 @@ await myDatabase.addCollections({
 });
 ```
 
-### Insert a document
+### Insert a Document
 
 Now that we have an RxCollection we can store some [documents](./rx-document.md) in it.
 
@@ -231,7 +231,7 @@ await firstDocument.patch({
 });
 ```
 
-### Delete a document
+### Delete a Document
 
 Delete the document so that it can no longer be found in queries:
 
@@ -257,7 +257,7 @@ observable.subscribe(notDoneDocs => {
 });
 ```
 
-### Observe a Document value
+### Observe a Document Value
 
 You can also subscribe to the fields of a single RxDocument. Add the `$` sign to the desired field and then subscribe to the returned observable.
 
@@ -285,7 +285,7 @@ replicateHTTP({
   collection: db.todos,
   push: {
     handler: async (rows) => {
-      return fetch("https:/example.com/api/todos/push", {
+      return fetch("https://example.com/api/todos/push", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(rows),

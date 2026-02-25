@@ -49,7 +49,7 @@ const mySchema = {
          * 10 Shards is a good value to start with.
          * 
          * IMPORTANT: Changing the value of shards is not possible on a already existing database state,
-         * you will loose access to  your data.
+         * you will lose access to  your data.
          */
         shards: 10,
         /**
@@ -65,7 +65,7 @@ const mySchema = {
 }
 
 /**
- * Create the RxDatabase with the wrapped RxStorage. 
+ * Create the [RxDatabase](./rx-database.md) with the wrapped RxStorage. 
  */
 const database = await createRxDatabase({
     name: 'mydatabase',

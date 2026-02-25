@@ -171,7 +171,7 @@ allStatesObservable.subscribe(allStates => {
 
 ## Migrating attachments
 
-When you store `RxAttachment`s together with your document, they can also be changed, added or removed while running the migration.
+When you store [RxAttachment](./rx-attachment.md)s together with your document, they can also be changed, added or removed while running the migration.
 You can do this by mutating the `oldDoc._attachments` property.
 
 ```js
@@ -185,7 +185,7 @@ const migrationStrategies = {
         // set _attachments to an empty object to delete all existing ones during the migration.
         oldDoc._attachments = {};
         return oldDoc;
-      }
+      },
       3: async function(oldDoc){
         // update the data field of a single attachment to change its data. 
         oldDoc._attachments.myFile.data = await createBlob(

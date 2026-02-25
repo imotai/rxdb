@@ -4,8 +4,8 @@
 
 # 🧹 Cleanup
 
-To make the replication work, and for other reasons, RxDB has to keep deleted documents in storage so that it can replicate their deletion state.
-This ensures that when a client is offline, the deletion state is still known and can be replicated with the backend when the client goes online again.
+To make the [replication](./replication.md) work, and for other reasons, RxDB has to keep deleted documents in storage so that it can replicate their deletion state.
+This ensures that when a client is [offline](./offline-first.md), the deletion state is still known and can be replicated with the backend when the client goes online again.
 
 Keeping too many deleted documents in the storage, can slow down queries or fill up too much disc space.
 With the cleanup plugin, RxDB will run cleanup cycles that clean up deleted documents when it can be done safely.
@@ -20,7 +20,7 @@ addRxPlugin(RxDBCleanupPlugin);
 
 ## Create a database with cleanup options
 
-You can set a specific cleanup policy when a `RxDatabase` is created. For most use cases, the defaults should be ok.
+You can set a specific cleanup policy when a [RxDatabase](./rx-database.md) is created. For most use cases, the defaults should be ok.
 
 ```ts
 import { createRxDatabase } from 'rxdb';
@@ -72,7 +72,7 @@ const db = await createRxDatabase({
 
 ## Calling cleanup manually
 
-You can manually run a cleanup per collection by calling `RxCollection.cleanup()`.
+You can manually run a cleanup per collection by calling [RxCollection](./rx-collection.md).cleanup().
 
 ```ts
 

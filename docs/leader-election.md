@@ -12,7 +12,7 @@ So if you would now inspect the traffic that these open tabs produce, you can se
 
 ## Use-case-example
 
-Imagine we have a website which displays the current temperature of the visitors location in various charts, numbers or heatmaps. To always display the live-data, the website opens a websocket to our API-Server which sends the current temperature every 10 seconds. Using the way most sites are currently build, we can now open it in 5 browser-tabs and it will open 5 websockets which send data 6*5=30 times per minute. This will not only waste the power of your clients device, but also wastes your api-servers resources by opening redundant connections.
+Imagine we have a website which displays the current temperature of the visitors location in various charts, numbers or heatmaps. To always display the live-data, the website opens a [websocket](./articles/websockets-sse-polling-webrtc-webtransport.md) to our API-Server which sends the current temperature every 10 seconds. Using the way most sites are currently build, we can now open it in 5 browser-tabs and it will open 5 websockets which send data 6*5=30 times per minute. This will not only waste the power of your clients device, but also wastes your api-servers resources by opening redundant connections.
 
 ## Solution
 
@@ -65,7 +65,7 @@ db.waitForLeadership()
 ## Handle Duplicate Leaders
 
 On rare occasions, it can happen that [more than one leader](https://github.com/pubkey/broadcast-channel/blob/master/.github/README.md#handle-duplicate-leaders) is elected. This can happen when the CPU is on 100% or for any other reason the JavaScript process is fully blocked for a long time.
-For most cases this is not really problem because on duplicate leaders, both browser tabs replicate with the same backend anyways.
+For most cases this is not really a problem because on duplicate leaders, both browser tabs replicate with the same backend anyways.
 To handle the duplicate leader event, you can access the leader elector and set a handler:
 
 ```ts
@@ -93,4 +93,4 @@ Run the [angular-example](https://github.com/pubkey/rxdb/tree/master/examples/an
 ## Notice
 
 The leader election is implemented via the  [broadcast-channel module](https://github.com/pubkey/broadcast-channel#using-the-leaderelection).
-The leader is elected between different processes on the same javascript-runtime. Like multiple tabs in the same browser or multiple NodeJs-processes on the same machine. It will not run between different replicated instances.
+The leader is elected between different processes on the same javascript-runtime. Like multiple tabs in the same browser or multiple Node.js processes on the same machine. It will not run between different replicated instances.

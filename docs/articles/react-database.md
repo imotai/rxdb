@@ -1,6 +1,6 @@
 # RxDB as a Database for React Applications
 
-> earn how the RxDB database supercharges React apps with offline access, real-time updates, and smooth data flow. Boost performance and engagement.
+> Learn how the RxDB database supercharges React apps with offline access, real-time updates, and smooth data flow. Boost performance and engagement.
 
 # RxDB as a Database for React Applications
 In the rapidly evolving landscape of web development, React has emerged as a cornerstone technology for building dynamic and responsive user interfaces. With the increasing complexity of modern web applications, efficient data management becomes pivotal. This article delves into the integration of RxDB, a potent client-side database, with React applications to optimize data handling and elevate the overall user experience.
@@ -36,7 +36,7 @@ RxDB embraces a [local-first](../offline-first.md) methodology, enabling applica
 Data replication is a cornerstone of modern applications that require synchronization between multiple clients and servers. RxDB provides robust data replication mechanisms that facilitate real-time synchronization between different instances of the database. This ensures that changes made on one client are promptly propagated to others, contributing to a cohesive and unified user experience.
 
 ### Observable Queries
-RxDB extends the concept of observables beyond data changes. It introduces observable queries, allowing developers to observe the results of database queries. This feature enables automatic updates to query results whenever relevant data changes occur. Observable queries simplify state management by eliminating the need to manually trigger updates in response to changing data.
+RxDB extends the concept of observables beyond data changes. It introduces observable queries, allowing developers to observe the results of database queries. This feature enables automatic updates to query results whenever relevant data changes occur. [Observable queries](../rx-query.md) simplify state management by eliminating the need to manually trigger updates in response to changing data.
 
 ```ts
 await db.heroes.find({
@@ -60,7 +60,7 @@ While considering database options for React applications, RxDB stands out due t
 
 ### IndexedDB in React and the Advantage of RxDB
 
-Using IndexedDB directly in React can be challenging due to its low-level, callback-based API which doesn't align neatly with modern React's Promise and async/await patterns. This intricacy often leads to bulky and complex implementations for developers. Also, when used wrong, IndexedDB can have a worse [performance profile](../slow-indexeddb.md) then it could have. In contrast, RxDB, with the [IndexedDB RxStorage](../rx-storage-indexeddb.md) and the [LocalStorage RxStorage](../rx-storage-localstorage.md), abstracts these complexities, integrating reactive programming and providing a more streamlined experience for data management in React applications. Thus, RxDB offers a more intuitive approach, eliminating much of the manual overhead required with IndexedDB.
+Using IndexedDB directly in React can be challenging due to its low-level, callback-based API which doesn't align neatly with modern React's Promise and async/await patterns. This intricacy often leads to bulky and complex implementations for developers. Also, when used wrong, IndexedDB can have a worse [performance profile](../slow-indexeddb.md) than it could have. In contrast, RxDB, with the [IndexedDB RxStorage](../rx-storage-indexeddb.md) and the [LocalStorage RxStorage](../rx-storage-localstorage.md), abstracts these complexities, integrating reactive programming and providing a more streamlined experience for data management in React applications. Thus, RxDB offers a more intuitive approach, eliminating much of the manual overhead required with IndexedDB.
 
 ### Using RxDB in a React Application
 
@@ -115,11 +115,11 @@ return (
 ### Different RxStorage Layers for RxDB
 RxDB offers multiple storage layers, each backed by a different underlying technology. Developers can choose the storage layer that best suits their application's requirements. Some available options include:
 
-- [LocalStorage RxStorage](../rx-storage-localstorage.md): Built on top of the browsers localstorage API.
+- [LocalStorage RxStorage](../rx-storage-localstorage.md): Built on top of the browser's LocalStorage API.
 - [IndexedDB RxStorage](../rx-storage-indexeddb.md): The default RxDB storage layer, providing efficient data storage in modern browsers.
-- [OPFS RxStorage](../rx-storage-opfs.md): Uses the Operational File System (OPFS) for storage, suitable for [Electron applications](../electron-database.md).
+- [OPFS RxStorage](../rx-storage-opfs.md): Uses the Origin Private File System (OPFS) for storage, suitable for [Electron applications](../electron-database.md).
 - [Memory RxStorage](../rx-storage-memory.md): Stores data in memory, primarily intended for testing and development purposes.
-- [SQLite RxStorage](../rx-storage-sqlite.md): Stores data in an SQLite database. Can be used in a browser with react by using a SQLite database that was [compiled to WebAssembly](https://sqlite.org/wasm/doc/trunk/index.md). Using SQLite in react might not be the best idea, because a compiled SQLite wasm file is about one megabyte of code that has to be loaded and rendered by your users. Using native browser APIs like IndexedDB and OPFS have shown to be a more optimal database solution for browser based react apps compared to SQLite.
+- [SQLite RxStorage](../rx-storage-sqlite.md): Stores data in an SQLite database. Can be used in a browser with React by using a SQLite database that was [compiled to WebAssembly](https://sqlite.org/wasm/doc/trunk/index.md). Using SQLite in React might not be the best idea, because a compiled SQLite wasm file is about one megabyte of code that has to be loaded and rendered by your users. Using native browser APIs like IndexedDB and OPFS have shown to be a more optimal database solution for browser based React apps compared to SQLite.
 
 ### Synchronizing Data with RxDB between Clients and Servers
 The offline-first approach is a fundamental principle of RxDB's design. When dealing with client-server synchronization, RxDB ensures that changes made offline are captured and propagated to the server once connectivity is reestablished. This mechanism guarantees that data remains consistent across different client instances, even when operating in an occasionally connected environment.

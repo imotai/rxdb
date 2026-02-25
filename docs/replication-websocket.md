@@ -18,7 +18,7 @@ import {
     startWebsocketServer
 } from 'rxdb/plugins/replication-websocket';
 
-// create a RxDatabase like normal
+// create a [RxDatabase](./rx-database.md) like normal
 const myDatabase = await createRxDatabase({/* ... */});
 
 // start a websocket server

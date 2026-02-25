@@ -4,15 +4,15 @@
 
 # IndexedDB RxStorage
 
-The IndexedDB [RxStorage](./rx-storage.md) is based on plain IndexedDB and can be used in browsers, [electron](./electron-database.md) or hybrid apps.
-Compared to other browser based storages, the IndexedDB storage has the smallest write- and read latency, the fastest initial page load
+The IndexedDB [RxStorage](./rx-storage.md) is based on plain IndexedDB and can be used in browsers, [electron](./electron-database.md) or [hybrid apps](./articles/mobile-database.md).
+Compared to other [browser based storages](./articles/browser-database.md), the IndexedDB storage has the smallest write- and read latency, the fastest initial page load
 and the smallest build size. Only for big datasets (more than 10k documents), the [OPFS storage](./rx-storage-opfs.md) is better suited.
 
-While the IndexedDB API itself can be very slow, the IndexedDB storage uses many tricks and performance optimizations, some of which are described [here](./slow-indexeddb.md). For example it uses custom index strings instead of the native IndexedDB indexes, batches cursor for faster bulk reads and many other improvements. The IndexedDB storage also operates on [Write-ahead logging](https://en.wikipedia.org/wiki/Write-ahead_logging) similar to SQLite, to improve write latency while still ensuring consistency on writes.
+While the IndexedDB API itself can be very slow, the IndexedDB storage uses many tricks and performance optimizations, some of which are described [here](./slow-indexeddb.md). For example it uses custom index strings instead of the native IndexedDB indexes, batches cursors for faster bulk reads and many other improvements. The IndexedDB storage also operates on [Write-ahead logging](https://en.wikipedia.org/wiki/Write-ahead_logging) similar to SQLite, to improve write latency while still ensuring consistency on writes.
 
 ## IndexedDB performance comparison
 
-Here is some performance comparison with other storages. Compared to the non-memory storages like [OPFS](./rx-storage-opfs.md) and [WASM SQLite](./rx-storage-sqlite.md). IndexedDB has the smallest build size and fastest write speed. Only OPFS is faster on queries over big datasets. See [performance comparison](./rx-storage-performance.md) page for a comparison with all storages.
+Here is some performance comparison with other storages. Compared to the non-memory storages like [OPFS](./rx-storage-opfs.md) and [WASM SQLite](./rx-storage-sqlite.md), IndexedDB has the smallest build size and fastest write speed. Only OPFS is faster on queries over big datasets. See [performance comparison](./rx-storage-performance.md) page for a comparison with all storages.
 
   
 
@@ -45,7 +45,7 @@ const db = await createRxDatabase({
 
 ## Overwrite/Polyfill the native IndexedDB
 
-Node.js has no IndexedDB API. To still run the IndexedDB `RxStorage` in Node.js, for example to run unit tests, you have to polyfill it.
+[Node.js](./nodejs-database.md) has no IndexedDB API. To still run the IndexedDB `RxStorage` in Node.js, for example to run unit tests, you have to polyfill it.
 You can do that by using the [fake-indexeddb](https://github.com/dumbmatter/fakeIndexedDB) module and pass it to the `getRxStorageIndexedDB()` function.
 
 ```ts

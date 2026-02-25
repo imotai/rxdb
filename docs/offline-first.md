@@ -4,9 +4,9 @@
 
 # Local First / Offline First
 
-Local-First (aka offline first) is a software paradigm where the software stores data locally at the clients device and must work as well offline as it does online.
-To implement this, you have to store data at the client side, so that your application can still access it when the internet goes away.
-This can be either done with complex caching strategies, or by using an local-first, [offline database](./articles/offline-database.md) (like [RxDB](https://rxdb.info)) that stores the data inside of a local database like [IndexedDB](./rx-storage-indexeddb.md) and replicates it from and to the backend in the background. This makes the local database, not the server, the gateway for all persistent changes in application state.
+Local-First (aka offline first) is a software paradigm where the software stores data locally on the client's device and must work as well offline as it does online.
+To implement this, you have to store data at the client side, so that your application can still access it when the internet connection is lost.
+This can be either done with complex caching strategies, or by using a local-first, [offline database](./articles/offline-database.md) (like [RxDB](https://rxdb.info)) that stores the data inside of a local database like [IndexedDB](./rx-storage-indexeddb.md) and replicates it from and to the backend in the background. This makes the local database, not the server, the gateway for all persistent changes in application state.
 
 > **Offline first is not about having no internet connection**
 
@@ -14,8 +14,8 @@ This can be either done with complex caching strategies, or by using an local-fi
 I wrote a follow-up version of offline/first local first about [Why Local-First Is the Future and what are Its Limitations](./articles/local-first-future.md)
 :::
 
-While in the past, internet connection was an unstable, things are changing especially for mobile devices.
-Mobile networks become better and having no internet becomes less common even in remote locations.
+While in the past, internet connection was unstable, things are changing especially for mobile devices.
+[Mobile](./articles/mobile-database.md) networks have become better and having no internet becomes less common even in remote locations.
 So if we did not care about offline first applications in the past, why should we even care now?
 In the following I will point out why offline first applications are better, not because they support offline usage, but because of other reasons.
 
@@ -34,7 +34,7 @@ In offline-first apps, the operations go directly against the local storage whic
 
 ## Multi-tab usage just works
 
-Many, even big websites like amazon, reddit and stack overflow do not handle multi tab usage correctly. When a user has multiple tabs of the website open and does a login on one of these tabs, the state does not change on the other tabs.
+Many, even big websites like Amazon, Reddit and Stack Overflow do not handle multi tab usage correctly. When a user has multiple tabs of the website open and does a login on one of these tabs, the state does not change on the other tabs.
 On offline first applications, there is always exactly one state of the data across all tabs. Offline first databases (like RxDB) store the data inside of IndexedDb and **share the state** between all tabs of the same origin.
 
   
@@ -46,14 +46,14 @@ But while bandwidth has improved over the years, latency became the limiting fac
 You can always increase the bandwidth by setting up more cables or sending more Starlink satellites to space.
 But reducing the latency is not so easy. It is defined by the physical properties of the transfer medium, the speed of light and the distance to the server. All of these three are hard to optimize.
 
-Offline first application benefit from that because sending the initial state to the client can be done much faster with more bandwidth. And once the data is there, we do no longer have to care about the latency to the backend server because you can run near [zero](./articles/zero-latency-local-first.md) latency queries locally.
+Offline first applications benefit from that because sending the initial state to the client can be done much faster with more bandwidth. And once the data is there, we no longer have to care about the latency to the backend server because you can run near [zero](./articles/zero-latency-local-first.md) latency queries locally.
 
   
 
 ## Realtime comes for free
 
 Most websites lie to their users. They do not lie because they display wrong data, but because they display **old data** that was loaded from the backend at the time the user opened the site.
-To overcome this, you could build a realtime website where you create a websocket that streams updates from the backend to the client. This means work. Your client needs to tell the server which page is currently opened and which updates the client is interested to. Then the server can push updates over the websocket and you can update the UI accordingly.
+To overcome this, you could build a realtime website where you create a websocket that streams updates from the backend to the client. This means work. Your client needs to tell the server which page is currently opened and which updates the client is interested in. Then the server can push updates over the websocket and you can update the UI accordingly.
 
 With offline first applications, you already have a realtime replication with the backend. Most offline first databases provide some concept of changestream or data subscriptions and with [RxDB](https://github.com/pubkey/rxdb) you can even directly subscribe to query results or single fields of documents. This makes it easy to have an always updated UI whenever data on the backend changes.
 
@@ -70,7 +70,7 @@ Once that data is transferred to the client, the user can do as many interaction
 ## Modern apps have longer runtimes
 
 In the past you used websites only for a short time. You open it, perform some action and then close it again. This made the first load time the important metric when evaluating page speed.
-Today web applications have changed and with it the way we use them. Single page applications are opened once and then used over the whole day. Chat apps, email clients, PWAs and hybrid apps. All of these were made to have long runtimes.
+Today web applications have changed and with it the way we use them. Single page applications are opened once and then used over the whole day. Chat apps, email clients, [PWAs](./articles/progressive-web-app-database.md) and hybrid apps. All of these were made to have long runtimes.
 This makes the time for user interactions more important than the initial loading time. Offline first applications benefit from that because there is often no loading time on user actions while loading the initial state to the client is not that relevant.
 
 ## You might not need REST

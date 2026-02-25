@@ -56,14 +56,14 @@ The biggest difference to RxDB is that firebase products are only able to be use
   
 
 Meteor (since 2012) is one of the oldest technologies for JavaScript realtime applications. Meteor is not a library but a whole framework with its own package manager, database management and replication.
-Because of how it works, it has proven to be hard to integrate it with other modern JavaScript frameworks like [angular](https://github.com/urigo/angular-meteor), [vue.js](./articles//vue-database.md) or svelte.
+Because of how it works, it has proven to be hard to integrate it with other modern JavaScript frameworks like [angular](https://github.com/urigo/angular-meteor), [vue.js](./articles/vue-database.md) or svelte.
 
 Meteor uses MongoDB in the backend and can replicate with a Minimongo database in the frontend.
 While testing, it has proven to be impossible to make a meteor app **offline first** capable. There are [some projects](https://github.com/frozeman/meteor-persistent-minimongo2) that might do this, but all are unmaintained.
 
 ### Minimongo
 
-Forked in Jan 2014 from meteorJSs' minimongo package, Minimongo is a client-side, in-memory, JavaScript version of MongoDB with backend replication over HTTP. Similar to MongoDB, it stores data in documents inside of collections and also has the same query syntax. Minimongo has different storage adapters for IndexedDB, WebSQL, [LocalStorage](./articles/localstorage.md) and SQLite.
+Forked in Jan 2014 from meteorJSs' minimongo package, Minimongo is a client-side, in-memory, JavaScript version of MongoDB with backend replication over HTTP. Similar to MongoDB, it stores data in documents inside of [collections](./rx-collection.md) and also has the same query syntax. Minimongo has different storage adapters for IndexedDB, WebSQL, [LocalStorage](./articles/localstorage.md) and SQLite.
 Compared to RxDB, Minimongo has no concept of revisions or conflict handling, which might lead to undefined behavior when used with replication or in multiple browser tabs. Minimongo has no observable queries or changestream.
 
 ### WatermelonDB
@@ -128,7 +128,7 @@ CouchDB has a changestream and a query syntax similar to MongoDB.
   
 
 PouchDB is a JavaScript database that is compatible with most of the CouchDB API. It has an adapter system that allows you to switch out the underlying storage layer. There are many adapters like for [IndexedDB](./rx-storage-indexeddb.md), [SQLite](./rx-storage-sqlite.md), the Filesystem and so on. The main benefit is to be able to replicate data with any CouchDB compatible endpoint.
-Because of the CouchDB compatibility, PouchDB has to do a lot of overhead in handling the revision tree of document, which is why it can show bad performance for bigger datasets.
+Because of the CouchDB compatibility, PouchDB has to do a lot of overhead in handling the revision tree of documents, which is why it can show bad performance for bigger datasets.
 RxDB was originally build around PouchDB until the storage layer was abstracted out in version [10.0.0](./releases/10.0.0.md) so it now allows to use different `RxStorage` implementations. PouchDB has some performance issues because of how it has to store the document revision tree to stay compatible with the CouchDB API.
 
 ### Couchbase
@@ -202,7 +202,7 @@ Now Realm is made for replication with the MongoDB Realm Sync based on the Mongo
 
 ### Apollo
 
-The Apollo GraphQL platform is made to transfer data between a server to UI applications over GraphQL endpoints. It contains several tools like GraphQL clients in different languages or libraries to create GraphQL endpoints.
+The Apollo [GraphQL](./replication-graphql.md) platform is made to transfer data between a server to UI applications over GraphQL endpoints. It contains several tools like GraphQL clients in different languages or libraries to create GraphQL endpoints.
 
 While it is has different caching features for offline usage, compared to RxDB it is not fully offline first because caching alone does not mean your application is fully usable when the user is offline.
 
@@ -213,7 +213,7 @@ Replicache can be used in most frontend technologies like browsers, React/Remix,
 
 ### InstantDB
 
-InstantDB is designed for real-time data synchronization with built-in offline support, allowing changes to be queued locally and [synced](./replication.md) when the user reconnects. While it offers seamless [optimistic updates](./articles/optimistic-ui.md) and rollback capabilities, its offline-first design is not as mature or comprehensive as RxDB's - the [offline data](./articles//offline-database.md) is more of a cache, not a full-database sync. The query language used is Datalog, and the backend sync service is written in Clojure. InstantDB is focused more on simplicity and real-time collaboration, with fewer customization options for storage or conflict resolution compared to RxDB, which supports various storage adapters and advanced conflict handling via CRDTs.
+InstantDB is designed for real-time data synchronization with built-in offline support, allowing changes to be queued locally and [synced](./replication.md) when the user reconnects. While it offers seamless [optimistic updates](./articles/optimistic-ui.md) and rollback capabilities, its offline-first design is not as mature or comprehensive as RxDB's - the [offline data](./articles/offline-database.md) is more of a cache, not a full-database sync. The query language used is Datalog, and the backend sync service is written in Clojure. InstantDB is focused more on simplicity and real-time collaboration, with fewer customization options for storage or conflict resolution compared to RxDB, which supports various storage adapters and advanced conflict handling via CRDTs.
 
 ### Yjs
 
@@ -225,11 +225,11 @@ Yjs is a [CRDT-based](./crdt.md) (Conflict-free Replicated Data Type) library fo
 
 ### SignalDB
 
-SignalDB provides a reactive, in-memory local-lirst JavaScript database with real-time sync, bit it doesn't offer the same level of multi-client replication or flexibility with storage backends that RxDB provides, and through a RxDB persistence adapters you can actually use SignalDB for the front-end reactivity while relying on RxDB for backend sync and persistence.
+SignalDB provides a reactive, in-memory local-first JavaScript database with real-time sync, but it doesn't offer the same level of multi-client replication or flexibility with storage backends that RxDB provides, and through a RxDB persistence adapters you can actually use SignalDB for the front-end reactivity while relying on RxDB for backend sync and persistence.
 
 ### PowerSync
 
-PowerSync is a "framework" for implementing local-first solutions. It centralizes business logic and conflict resolution on a central, authoritative server (PostgreSQL or MongoDB), vs RxDB that also supports custom backends. Both RxDB and PowerSync can be used with a variety of storage backends, but PowerSync uses SQLite as the front-end database which has shown to be slow because the WASM-SQLite abstraction increases read and write latency. In terms of client SDKs, PowerSync offers Flutter, Kotlin, and Swift in addition to JS/TypeScript. PowerSync offers man client technologies, PowerSync is under a license that restricts commercial use that competes with PowerSync and the JourneyApps Platform.
+PowerSync is a "framework" for implementing local-first solutions. It centralizes business logic and conflict resolution on a central, authoritative server (PostgreSQL or MongoDB), vs RxDB that also supports custom backends. Both RxDB and PowerSync can be used with a variety of storage backends, but PowerSync uses SQLite as the front-end database which has shown to be slow because the WASM-SQLite abstraction increases read and write latency. In terms of client SDKs, PowerSync offers Flutter, Kotlin, and Swift in addition to JS/TypeScript. PowerSync offers many client technologies, PowerSync is under a license that restricts commercial use that competes with PowerSync and the JourneyApps Platform.
 
 # Read further
 

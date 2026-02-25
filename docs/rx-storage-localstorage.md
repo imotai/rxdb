@@ -6,7 +6,7 @@ import {Steps} from '@site/src/components/steps';
 
 # RxStorage LocalStorage
 
-RxDB can persist data in various ways. One of the simplest methods is using the browser’s built-in [LocalStorage](./articles/localstorage.md). This storage engine allows you to store and retrieve RxDB documents directly from the browser without needing additional plugins or libraries.
+RxDB can persist data in various ways. One of the simplest methods is using the browser’s built-in [LocalStorage](./articles/localstorage.md). This storage engine allows you to store and retrieve [RxDB documents](./rx-document.md) directly from the browser without needing additional plugins or libraries.
 
 > **Recommended Default for using RxDB in the Browser**
 >
@@ -69,7 +69,7 @@ await db.addCollections({
 ### Insert a document
 
 ```ts
-await db.tasks.insert({ id: 'task-01', title: 'Get started with RxDB' });
+await db.tasks.insert({ id: 'task-01', title: 'Get started with RxDB', done: false });
 ```
 
 ### Query documents
@@ -87,7 +87,7 @@ const nonDoneTasks = await db.tasks.find({
 
 ## Mocking the LocalStorage API for testing in Node.js
 
-While the `localStorage` API only exists in browsers, your can the LocalStorage based storage in Node.js by using the mock that comes with RxDB.
+While the `localStorage` API only exists in browsers, you can use the LocalStorage based storage in [Node.js](./nodejs-database.md) by using the mock that comes with RxDB.
 This is intended to be used in unit tests or other test suites:
 
 ```ts

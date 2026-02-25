@@ -47,7 +47,7 @@ async function createDb() {
 }
 ```
 
-## Usage with Angular
+## Usage with [Angular](./articles/angular-database.md)
 
 ```ts
 import { isDevMode } from '@angular/core';
