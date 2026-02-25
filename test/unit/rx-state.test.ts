@@ -111,7 +111,7 @@ addRxPlugin(RxDBJsonDumpPlugin);
                 assert.ok(state1 === database.states['']);
                 assert.ok(state3 === database.states.foobar);
 
-                database.remove();
+                await database.remove();
             });
         });
         describe('write state data', () => {

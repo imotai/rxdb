@@ -218,7 +218,7 @@ describeParallel('attachments.test.ts', () => {
             doc = await c.findOne().exec(true);
             const attachment: any = doc.getAttachment('cat.txt');
             assert.ok(attachment);
-            c.database.close();
+            await c.database.close();
         });
         it('should find the attachment after another doc-update', async () => {
             const c = await humansCollection.createAttachments(1);
@@ -236,7 +236,7 @@ describeParallel('attachments.test.ts', () => {
             const attachment: any = doc.getAttachment('cat.txt');
             assert.ok(attachment);
             assert.strictEqual(attachment.type, 'text/plain');
-            c.database.close();
+            await c.database.close();
         });
         it('should find the attachment after database is re-created', async () => {
             if (!config.storage.hasPersistence) {
