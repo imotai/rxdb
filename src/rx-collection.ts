@@ -231,7 +231,7 @@ export class RxCollectionBase<
              */
             let count = 0;
             while (count < 10 && OPEN_COLLECTIONS.size >= NON_PREMIUM_COLLECTION_LIMIT) {
-                await this.promiseWait(count * 30);
+                await this.promiseWait(30);
                 count++;
             }
             if (OPEN_COLLECTIONS.size > NON_PREMIUM_COLLECTION_LIMIT) {
