@@ -14,8 +14,7 @@ import {
     PROMISE_RESOLVE_FALSE,
     PROMISE_RESOLVE_VOID,
     NON_PREMIUM_COLLECTION_LIMIT,
-    hasPremiumFlag,
-    now
+    hasPremiumFlag
 } from './plugins/utils/index.ts';
 import {
     fillObjectDataBeforeInsert,
