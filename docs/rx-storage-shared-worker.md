@@ -61,7 +61,8 @@ const database = await createRxDatabase({
              */
             workerOptions: {
                 type: 'module',
-                credentials: 'omit'
+                credentials: 'omit',
+                extendedLifetime: true
             }
         }
     )
@@ -86,7 +87,8 @@ const database = await createRxDatabase({
     storage: getRxStorageSharedWorker(
         {
             /**
-             * Path to where the copied file from node_modules/rxdb-premium/dist/workers
+             * Path to where the copied
+             * file from node_modules/rxdb-premium/dist/workers
              * is reachable from the webserver.
              */
             workerInput: '/indexeddb.shared-worker.js'

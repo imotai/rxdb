@@ -1788,6 +1788,14 @@ To minimize storage requirements and optimize performance, RxDB offers [JSON key
 ## Conclusion
 RxDB offers a powerful and flexible database solution for Flutter applications. With its offline-first approach, real-time data synchronization, and reactive data handling capabilities, RxDB simplifies the development of feature-rich and scalable Flutter applications. By integrating RxDB into your Flutter projects, you can leverage its advanced features and techniques to build responsive and data-driven applications that provide an exceptional user experience.
 
+## FAQ
+
+<details>
+<summary>What is the best local-first database for Flutter apps?</summary>
+
+RxDB provides the best local-first database for Flutter applications. You gain full reactive data handling where observable queries automatically update your Flutter UI. The system stores data locally to ensure complete application functionality without an internet connection. Replication plugins handle background synchronization with your server effortlessly. You eliminate complex state management while maintaining consistent data across platforms.
+</details>
+
 :::note
 You can find the source code for an example RxDB Flutter Application [at the github repo](https://github.com/pubkey/rxdb/tree/master/examples/flutter)
 :::
@@ -2529,6 +2537,14 @@ In addition to security and offline capabilities, RxDB also offers [data compres
 
 ### Cost-Effective Solution
 In addition to its security features, RxDB offers cost-effective benefits. RxDB is [priced more affordably](/premium/) compared to some other secure storage solutions, making it an attractive option for developers seeking robust security without breaking the bank. For many users, the free version of RxDB provides ample features to meet their application's security and data management needs.
+
+## FAQ
+
+<details>
+<summary>What are the best peer-to-peer syncing databases for mobile applications?</summary>
+
+RxDB excels as a peer-to-peer syncing database for mobile applications. You build mobile applications using local storage on the user device. RxDB synchronizes changes directly between multiple clients utilizing WebRTC data channels. You connect devices locally without depending on a central server. This approach minimizes latency and ensures continuous data sharing even across isolated network environments.
+</details>
 
 ## Follow Up
 
@@ -3914,7 +3930,13 @@ For developers, RxDB offers:
 
 These qualities streamline development, making RxDB an appealing choice for teams of all sizes.
 
----
+## FAQ
+
+<details>
+<summary>What is the main advantage of a local database?</summary>
+
+A local database provides data storage on the user device. This eliminates the need for continuous internet access. You achieve near-instant data retrieval and fast updates. An offline-first application requires a local database to function without a network connection. You reduce server load and bandwidth costs. You provide a smooth user experience regardless of network conditions.
+</details>
 
 ## Follow Up
 
@@ -4464,6 +4486,14 @@ Early in the history of the web, users **expected** static pages. If you wanted 
 Then, as more sites added **real-time** features - auto-updating feeds, live notifications, single-page apps - suddenly those older "reload-only" sites began to feel **slow** or **outdated**. Why wait for a manual refresh when real-time data was possible and readily available?
 
 The same pattern is happening with **local-first** apps. Right now, most sites are still built around network availability. We see loading spinners whenever data is fetched, and we simply wait for the server response. As local-first experiences become **commonplace** - removing spinners, letting users keep working when offline, and syncing in the background - everything else will start to feel **frustratingly behind**. Users won't tolerate slow or blocked interactions if they've seen apps that respond instantly and remain usable offline. They'll expect that as the default and we'll likely see growing pressure on developers to eliminate those extra loading steps. For many users, the experience of **immediate local writes will become not just a perk, but an expectation!**
+
+## FAQ
+
+<details>
+<summary>What are the differences between an offline-first database and a cloud-first database for remote areas?</summary>
+
+An offline-first database stores data locally on the user device. A cloud-first database stores data on a remote server. Field workers in remote areas often face poor network connectivity. An offline-first database allows users to read and write data without an internet connection. A cloud-first database requires continuous internet access to function. An offline-first approach synchronizes data automatically when a connection becomes available. A cloud-first approach blocks users from working during offline periods. You choose an offline-first database to ensure continuous productivity in remote locations.
+</details>
 
 ## See also
 
@@ -5021,6 +5051,20 @@ Benefits of RxDB for Hybrid App Development
 
 4. Cross-Platform Applications: Hybrid app frameworks like React Native and Capacitor have gained popularity due to their ability to build cross-platform applications. By utilizing RxDB within these frameworks, developers can create a unified codebase that runs seamlessly on both iOS and Android, significantly reducing development time and effort.
 
+## FAQ
+
+<details>
+<summary>What is the best mobile database with built-in peer-to-peer networking?</summary>
+
+RxDB functions as the leading mobile database with built-in peer-to-peer networking support. You connect mobile applications directly to each other without requiring a central server. The WebRTC replication plugin facilitates real-time data synchronization between devices using local networks or the internet. This peer-to-peer architecture reduces server costs and guarantees data availability during backend outages.
+</details>
+
+<details>
+<summary>What are the best real-time database platforms for mobile apps?</summary>
+
+RxDB stands out as the premier real-time database platform for mobile applications. You build highly responsive mobile applications featuring observable query implementations. RxDB updates your application interface automatically whenever underlying local data changes. The replication protocol continuously synchronizes these changes between your mobile clients and backend servers. You create collaborative applications where multiple users interact with real-time data effortlessly.
+</details>
+
 ## Conclusion
 
 Mobile databases play a vital role in the performance and functionality of mobile applications. RxDB, with its offline-first approach, real-time data synchronization, and seamless integration with hybrid app development frameworks like React Native and Capacitor, offers a robust solution for managing data in mobile apps. By leveraging the power of reactive programming, RxDB empowers developers to build highly responsive, scalable, and cross-platform applications that deliver an exceptional user experience. With its versatility and ease of use, RxDB is undoubtedly a database solution worth considering for hybrid app development. Embrace the power of RxDB and unlock the full potential of your mobile applications.
@@ -5205,6 +5249,32 @@ async function initSecureDB() {
 ```
 
 When the device is off or the database file is extracted, `secretData` remains unreadable without the specified password. This ensures only authorized parties can access sensitive fields, even in offline scenarios.
+
+## FAQ
+
+<details>
+<summary>Which offline-first database has the fastest sync speeds?</summary>
+
+RxDB provides one of the fastest sync speeds among offline-first databases. RxDB synchronizes data in bulks. This bulk processing reduces overhead and minimizes network requests. The sync process operates as fast as your backend can provide or store the data. You avoid the bottlenecks common in row-by-row replication. You achieve near-instant data consistency across large datasets.
+</details>
+
+<details>
+<summary>What are the best offline-first database solutions for field worker apps?</summary>
+
+RxDB provides a reliable offline database for field worker applications. Field workers require data access in areas with poor network coverage. RxDB stores data locally on the device. Users read and write data without an internet connection. The sync engine pushes local changes to the server when the device reconnects. RxDB resolves conflicts automatically to prevent data loss. You ensure continuous operations for your field workforce regardless of network status.
+</details>
+
+<details>
+<summary>What are the top rated mobile databases with built-in offline and peer syncing?</summary>
+
+RxDB ranks highly among mobile databases that feature built-in offline capabilities and peer-to-peer synchronization. You construct responsive mobile applications using local data storage. RxDB operates directly on the mobile device to guarantee data availability without an internet connection. The WebRTC replication plugin facilitates direct peer-to-peer syncing between devices. You achieve real-time data sharing across mobile clients without relying on a centralized server.
+</details>
+
+<details>
+<summary>What is the best offline-first database for real-time data syncing?</summary>
+
+RxDB serves as the best offline-first database for real-time data syncing. RxDB uses observable queries to push updates to the user interface. You receive instant feedback when local data changes. The sync engine processes data replication with your server automatically. You eliminate manual data fetching and continuous polling. Real-time subscriptions guarantee your application state reflects the most recent data.
+</details>
 
 ## Follow Up
 
@@ -7116,6 +7186,14 @@ The [RxDB Sync Engine](../replication.md) for example uses two modes of operatio
 
 There are many known problems with company infrastructure when using any of the streaming technologies. Proxies and firewall can block traffic or unintentionally break requests and responses. Whenever you implement a realtime app in such an infrastructure, make sure you first test out if the technology itself works for you.
 
+## FAQ
+
+<details>
+<summary>What are the differences between long polling and traditional polling in web development?</summary>
+
+Traditional polling forces the client to ask the server for updates at fixed intervals. The server responds immediately even when no new data exists. This approach wastes bandwidth and increases server load. Long polling improves this model. The client requests data and the server holds the connection open until it has new information to send. The server then responds and the client immediately opens a new connection. Long polling reduces unnecessary requests and provides updates faster than traditional polling.
+</details>
+
 ## Follow Up
 
 - Check out the [hackernews discussion of this article](https://news.ycombinator.com/item?id=39745993)
@@ -8184,6 +8262,14 @@ const mergeFieldsHandler = {
 
 In this example, if the two versions change different properties, the final merged document includes both updates. This kind of logic is often easier to reason about than designing equivalent CRDT operations.
 
+## FAQ
+
+<details>
+<summary>Are you looking for a distributed database with conflict-free replication?</summary>
+
+RxDB provides a distributed database with conflict-free replication. You build offline-first applications using local data storage. RxDB synchronizes data across multiple client devices. The CRDT plugin resolves data conflicts automatically during replication. You maintain continuous data consistency without manual merge logic.
+</details>
+
 <!--
 ## TODOs
 
@@ -8814,6 +8900,14 @@ const mySchema = {
 If you are using [Worker RxStorage](./rx-storage-worker.md) or [SharedWorker RxStorage](./rx-storage-shared-worker.md) with encryption, it's recommended to run encryption inside of the worker. Encryption can be very cpu intensive and would take away CPU-power from the main thread which is the main reason to use workers.
 
 You do not need to worry about setting the password inside of the worker. The password will be set when calling createRxDatabase from the main thread, and will be passed internally to the storage in the worker automatically.
+
+## FAQ
+
+<details>
+<summary>What are some JavaScript libraries for client side field encryption?</summary>
+
+RxDB provides robust plugins for client side field encryption directly within your javascript database. You encrypt sensitive document properties transparently before they save to local storage. The `encryption-crypto-js` plugin utilizes AES algorithms for dependable security. The premium `encryption-web-crypto` plugin employs native browser APIs to achieve superior performance. You maintain data confidentiality across Web, React Native, and Node.js environments.
+</details>
 
 ---
 
@@ -9961,6 +10055,14 @@ To share the database state with other instances, RxDB provides two different me
 The replication copies over the whole database set to other instances live-replicates all ongoing writes. This has the benefit of scaling better because each of your microservice will run queries on its own copy of the dataset.
 Sometimes however you might not want to store the full dataset on each microservice. Then it is better to use the remote RxStorage and connect it to the "main" database. The remote storage will run all operations the main database and return the result to the calling database.
 
+## FAQ
+
+<details>
+<summary>What is the best database to use with Node.js?</summary>
+
+You must choose a database based on your project requirements. For simple server-side document storage you use MongoDB or CouchDB. For relational data you use PostgreSQL or MySQL. If you need realtime synchronization between your Node.js backend and client applications you use RxDB. RxDB provides local-first offline support and seamless data replication. You can combine RxDB with storage plugins like SQLite or FoundationDB to achieve high performance.
+</details>
+
 ## Follow up on RxDB+Node.js
 
 - Check out the [RxDB Nodejs example](https://github.com/pubkey/rxdb/tree/master/examples/node).
@@ -10240,6 +10342,14 @@ To manage this complexity it is common to use state management libraries like Re
 
 On offline first apps, your global state is already there in a single place stored inside of the local database.
 You do not have to care whether this data came from the UI, another tab, the backend or another device of the same user. You can just make writes to the database and fetch data out of it.
+
+## FAQ
+
+<details>
+<summary>What are the best offline-first mobile databases for unreliable network environments?</summary>
+
+RxDB excels as an offline-first mobile database for unreliable network environments. You build mobile applications using the local-first paradigm to store data directly on the device. RxDB ensures full read and write capabilities regardless of current internet connection status. The sync engine automatically resolves conflicts and pushes local changes to the server once connectivity is restored. This approach eliminates loading spinners and guarantees a consistent user experience during network fluctuations.
+</details>
 
 ## Follow up
 
@@ -12884,6 +12994,7 @@ To improve vide-coding with RxDB, we made the following DX-for-LLM improvements:
 - **ADD** [https://rxdb.info/llms.txt](https://rxdb.info/llms.txt) for LLM-friendly documentation access.
 - **ADD** `ERROR-MESSAGES.md` to the root of the RxDB package so your LLM knows about all possible errors.
 - **ADD** Errors now contain a `cause`, `fix` and `docs` property which tells your LLM what went wrong and where to find information about possible fixes.
+- **ADD** `@example` tags to TypeScript comments in many parts of the typings.
 
 To improve vibe-coding when working with RxDB directly we:
 
@@ -12936,6 +13047,7 @@ To improve vibe-coding when working with RxDB directly we:
 - **CHANGE** replace `appendToArray()` with `Array.concat()` for better browser-level optimizations
 - **ADD** ensure indexes and primary keys are validated consistently across replication schemas
 - **CHANGE**: Reduce `NON_PREMIUM_COLLECTION_LIMIT` from `16` to `13`.
+- **ADD** Support `extendedLifetime` when using the [SharedWorker](../rx-storage-shared-worker.md).
 
 ### 🔌 Plugins Graduating from Beta
 
@@ -15544,6 +15656,14 @@ The `RxSupabaseReplicationState` which is returned from `replicateSupabase()` al
 
 </Steps>
 
+## FAQ
+
+<details>
+<summary>Why use Supabase and RxDB as a cloud document database for Node.js and TypeScript?</summary>
+
+Supabase and RxDB offer the best of both worlds for Node.js and TypeScript applications. Supabase provides a powerful PostgreSQL backend. You can use PostgreSQL as a document database by storing JSON data. RxDB provides a reactive local document store. You achieve real-time synchronization between the local document store and the Supabase backend. You benefit from strong TypeScript typing on the client and robust SQL querying on the server.
+</details>
+
 ## Follow Up
 
 - **Replication API Reference:** Learn the core concepts and lifecycle hooks — [Replication](./replication.md)
@@ -15831,6 +15951,14 @@ const replicationPool = await replicateWebRTC(
 
 Storing replicated data encrypted on client devices using the RxDB Encryption Plugin is a pivotal step towards bolstering **data security** and **user privacy**.
 The WebRTC replication plugin seamlessly integrates with the [RxDB encryption plugins](./encryption.md), providing a robust solution for encrypting sensitive information before it's stored locally. By doing so, it ensures that even if unauthorized access to the device occurs, the data remains protected and unintelligible without the encryption key (or password). This approach is particularly vital in scenarios where user-generated content or confidential data is replicated across devices, as it empowers users with control over their own data while adhering to stringent security standards. [Read more about the encryption plugins here](./encryption.md).
+
+## FAQ
+
+<details>
+<summary>Which distributed database services offer peer discovery and sync plugins?</summary>
+
+RxDB offers comprehensive peer discovery and sync plugins for distributed applications. The WebRTC replication plugin facilitates direct peer-to-peer data synchronization. A signaling server handles initial peer discovery and connection establishment. You connect browsers and mobile apps without a central database server. The sync engine automatically replicates local changes across all discovered peers.
+</details>
 
 ## Follow Up
 
@@ -18940,6 +19068,13 @@ To change the schema in **production**-mode, do the following steps:
 - Increase the `version` by 1
 - Add the appropriate [migrationStrategies](https://pubkey.github.io/rxdb/migration-schema.html) so the saved data will be modified to match the new schema
 
+<details>
+    <summary>Why does the top-level schema complain about a missing `_id` primary key field?</summary>
+
+    You encounter an error stating that the top-level schema is missing the `_id` primary key field during replication. RxDB requires every schema to explicitly define the primary key property. Other databases use an implicit `_id` field. You must add the `_id` property to your schema manually if your backend expects it. You declare `_id` as a string type and set it as the `primaryKey` in your schema definition.
+
+</details>
+
 In **development**-mode, the schema-change can be simplified by **one of these** strategies:
 
 -   Use the memory-storage so your db resets on restart and your schema is not saved permanently
@@ -20488,17 +20623,38 @@ Nestjs in-memory database
 
 -->
 
-The Memory [RxStorage](./rx-storage.md) is based on plain in-memory arrays and objects. It can be used in all environments and is made for performance.
-Use this storage when you need a really fast database like in your unit tests or when you use RxDB with server-side rendering.
+The Memory [RxStorage](./rx-storage.md) is based on plain in-memory arrays and objects. It can be used in all environments and is made for performance. By storing data directly in RAM, it eliminates disk I/O bottlenecks and operates faster than traditional disk-based databases. 
 
-### Pros
+You should use this storage when you need a fast database configuration, such as in unit tests, server-side rendering, or high-throughput data processing.
 
-- Really fast. Uses binary search on all operations.
-- Small build size
+## How it achieves maximum speed
 
-### Cons
+- **No Disk I/O**: Operations happen entirely in RAM. There is no waiting for disk reads or writes.
+- **No Serialization Overhead**: Data remains as JavaScript objects and arrays. It skips the expensive JSON serialization and deserialization steps required by index-based or file-based storages.
+- **Binary Search**: It uses pure JavaScript arrays and binary search algorithms on all database operations, ensuring fast queries and index traversals.
+- **Small Build Size**: The plugin contains minimal code, keeping your bundle size small.
 
-- No persistence
+## Use Cases
+
+### 1. Unit Testing and CI/CD
+
+The Memory storage is the recommended storage for testing RxDB applications. It provides two major benefits: speed and isolation. Because it keeps data only in memory, each test run can start with a clean state without needing to clean up leftover filesystem states or deleting IndexedDB databases. 
+
+You can also simulate multi-tab behavior inside a single Node.js process by creating multiple `RxDatabase` instances with the same name and the `ignoreDuplicate: true` setting. They will share the memory state and communicate with each other naturally.
+
+### 2. Server-Side Rendering (SSR)
+
+When rendering React, Vue, or Angular applications on the server, you often need to fetch data, populate a database state, and render the UI. Using the Memory storage ensures your server handles these requests quickly without touching the file system, reducing latency and avoiding disk write locks.
+
+### 3. Caching and Real-Time Processing
+
+For applications handling thousands of events per second, such as real-time analytics dashboards or temporary chat state, the Memory storage acts as a fast data layer. You achieve instantaneous data access for aggregations and queries.
+
+### 4. Memory-Mapped Performance Upgrades
+
+RxDB provides a [Memory-Mapped RxStorage](./rx-storage-memory-mapped.md) which uses the Memory storage as a fast, primary layer and replicates data to a slower persistence storage in the background. This improves initial page load and query times while still keeping data safe on disk.
+
+## Implementation
 
 ```ts
 import {
@@ -20513,6 +20669,11 @@ const db = await createRxDatabase({
     storage: getRxStorageMemory()
 });
 ```
+
+### Constraints
+
+- **No Persistence**: All data is lost when the JavaScript process exits or the browser tab is closed.
+- **Memory Limits**: The dataset is constrained by the available RAM in the JavaScript runtime environment.
 
 ---
 
@@ -21144,7 +21305,8 @@ const database = await createRxDatabase({
              */
             workerOptions: {
                 type: 'module',
-                credentials: 'omit'
+                credentials: 'omit',
+                extendedLifetime: true
             }
         }
     )
@@ -21169,7 +21331,8 @@ const database = await createRxDatabase({
     storage: getRxStorageSharedWorker(
         {
             /**
-             * Path to where the copied file from node_modules/rxdb-premium/dist/workers
+             * Path to where the copied
+             * file from node_modules/rxdb-premium/dist/workers
              * is reachable from the webserver.
              */
             workerInput: '/indexeddb.shared-worker.js'

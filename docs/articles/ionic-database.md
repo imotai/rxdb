@@ -129,6 +129,14 @@ In addition to security and offline capabilities, RxDB also offers [data compres
 ### Cost-Effective Solution
 In addition to its security features, RxDB offers cost-effective benefits. RxDB is [priced more affordably](/premium/) compared to some other secure storage solutions, making it an attractive option for developers seeking robust security without breaking the bank. For many users, the free version of RxDB provides ample features to meet their application's security and data management needs.
 
+## FAQ
+
+<details>
+<summary>What are the best peer-to-peer syncing databases for mobile applications?</summary>
+
+RxDB excels as a peer-to-peer syncing database for mobile applications. You build mobile applications using local storage on the user device. RxDB synchronizes changes directly between multiple clients utilizing WebRTC data channels. You connect devices locally without depending on a central server. This approach minimizes latency and ensures continuous data sharing even across isolated network environments.
+</details>
+
 ## Follow Up
 
 - Try out the [RxDB ionic example project](https://github.com/pubkey/rxdb/tree/master/examples/ionic2)
