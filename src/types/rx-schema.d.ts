@@ -111,6 +111,7 @@ export type RxJsonSchema<
      * retry this in later typescript-versions
      */
     type: 'object' | string;
+
     properties: { [key in StringKeys<RxDocType>]: TopLevelProperty };
 
     /**
@@ -123,6 +124,7 @@ export type RxJsonSchema<
      * Indexes that will be used for the queries.
      * RxDB will internally prepend the _deleted field to the index
      * because queries do NOT return documents with _deleted=true.
+     * @example ['firstName', ['lastName', 'yearOfBirth']]
      */
     indexes?: (string | string[])[] | (string | readonly string[])[] | readonly (string | string[])[] | readonly (string | readonly string[])[];
 
@@ -132,12 +134,25 @@ export type RxJsonSchema<
      * or to speed up requests when you use the RxDB server.
      * These could also be utilised when you build a plugin that
      * has to query documents without respecting the _deleted value.
+     * @example [['firstName'], ['lastName', 'yearOfBirth']]
      */
     internalIndexes?: string[][] | readonly string[][];
 
 
+    /**
+     * Array of fields that should be encrypted.
+     * @link https://rxdb.info/encryption.html
+     * @example ['secret']
+     */
     encrypted?: string[] | readonly string[];
+
+    /**
+     * Enables key compression for the collection to reduce storage size.
+     * @link https://rxdb.info/key-compression.html
+     * @example true
+     */
     keyCompression?: boolean;
+
     /**
      * if not set, rxdb will set 'false' as default
      * Having additionalProperties: true is not allowed on the root level to ensure
@@ -172,6 +187,11 @@ export type RxJsonSchema<
          */
         mode: 'database' | 'collection';
     };
+    /**
+     * Configuration for Conflict-free Replicated Data Types (CRDTs).
+     * @link https://rxdb.info/crdt.html
+     * @example { field: 'crdts' }
+     */
     crdt?: CRDTSchemaOptions<RxDocType>;
 };
 
