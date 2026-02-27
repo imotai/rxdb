@@ -201,6 +201,7 @@ const config: Config = {
                     sidebarPath: './sidebars.js',
                     routeBasePath: '',
                     path: './docs',
+                    showLastUpdateTime: true,
                     breadcrumbs: false,
                     // I disabled the editUrl because it just confuses users and does not look professional
                     // editUrl: 'https://github.com/pubkey/rxdb/tree/master/docs-src/',
