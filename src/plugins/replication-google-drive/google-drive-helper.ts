@@ -162,7 +162,7 @@ export async function createEmptyFile(
     ].join(' and ');
     const url2 =
         googleDriveOptions.apiEndpoint + '/drive/v3/files' +
-        '?fields=files(id,etag,size,createdTime)' +
+        '?fields=files(id)' +
         '&orderBy=createdTime asc' +
         '&q=' + encodeURIComponent(query);
     const res = await fetch(url2, {
@@ -171,16 +171,66 @@ export async function createEmptyFile(
         },
     });
     const data = await res.json();
-    const file = ensureNotFalsy(data.files[0]);
+    const fileId = ensureNotFalsy(data.files[0]?.id);
+
+    /**
+     * Fetch the file metadata via v2 to get the etag (from the ETag response header)
+     * and the file size atomically in a single request.
+     * This avoids a race condition where the etag could change between
+     * the file listing and a separate etag fetch.
+     */
+    const meta = await getFileMetadataV2(googleDriveOptions, fileId);
     return {
         status: response.status,
-        etag: ensureNotFalsy(file.etag),
-        createdTime: ensureNotFalsy(file.createdTime),
-        fileId: ensureNotFalsy(file.id),
-        size: parseInt(file.size, 10)
-    }
+        etag: meta.etag,
+        createdTime: meta.createdTime,
+        fileId,
+        size: meta.size
+    };
 }
 
+
+/**
+ * Fetches file metadata from the Google Drive v2 API.
+ * Returns the etag (from the ETag response header), size, and createdTime
+ * in a single atomic request.
+ *
+ * Note: the v2 API uses "createdDate" and "fileSize" as field names;
+ * this function maps them to "createdTime" and "size" for consistency
+ * with the rest of the codebase.
+ */
+async function getFileMetadataV2(
+    googleDriveOptions: GoogleDriveOptionsWithDefaults,
+    fileId: string
+): Promise<{ etag: string; size: number; createdTime: string }> {
+    const url =
+        googleDriveOptions.apiEndpoint +
+        `/drive/v2/files/${encodeURIComponent(fileId)}`;
+    const res = await fetch(url, {
+        headers: {
+            Authorization: `Bearer ${googleDriveOptions.authToken}`,
+        },
+    });
+    if (!res.ok) {
+        throw await newRxFetchError(res, { args: { fileId } });
+    }
+    const meta = await res.json();
+    return {
+        etag: ensureNotFalsy(res.headers.get('ETag'), 'ETag missing'),
+        // v2 uses "fileSize" and "createdDate" instead of the v3 "size" and "createdTime"
+        size: parseInt(meta.fileSize ?? '0', 10),
+        createdTime: ensureNotFalsy(meta.createdDate)
+    };
+}
+
+
+export async function getFileEtag(
+    googleDriveOptions: GoogleDriveOptionsWithDefaults,
+    fileId: string
+): Promise<string> {
+    const meta = await getFileMetadataV2(googleDriveOptions, fileId);
+    return meta.etag;
+}
 
 export async function fillFileIfEtagMatches<T = any>(
     googleDriveOptions: GoogleDriveOptionsWithDefaults,
