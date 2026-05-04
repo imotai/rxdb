@@ -33,6 +33,13 @@ export type RxCollectionCreator<RxDocType = any> = {
     attachments?: KeyFunctionMap;
     options?: any;
     /**
+     * When set to a positive number (in milliseconds), live query updates triggered by
+     * write events are grouped using auditTime before _ensureEqual() runs.
+     * Overrides liveQueryUpdateThrottleTime set at the database level for this collection.
+     * When not set, the database-level value is used.
+     */
+    liveQueryUpdateThrottleTime?: number;
+    /**
      * Set this to true if you want to store local documents
      * in the RxCollection instance.
      */

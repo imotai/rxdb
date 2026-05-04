@@ -48,6 +48,10 @@ The schema defines how the documents of the collection are structured. RxDB uses
 ### ORM-functions
 With the parameters `statics`, `methods` and `attachments`, you can define ORM functions that are applied to each of these objects that belong to this collection. See [ORM/DRM](./orm.md).
 
+### liveQueryUpdateThrottleTime
+
+Overrides `liveQueryUpdateThrottleTime` set at the database level for this specific collection. See [liveQueryUpdateThrottleTime](./rx-query.md#livequeryupdatethrottletime).
+
 ### Migration
 With the parameters `migrationStrategies` and `autoMigrate` you can specify how migration between different schema-versions should be done. [See Migration](./migration-schema.md).
 

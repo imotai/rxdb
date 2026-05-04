@@ -153,6 +153,11 @@ const db = await createRxDatabase({
 
 If you get the error message `TypeError: Cannot read properties of undefined (reading 'digest')` this likely means that you are neither running on `localhost` nor on `https` which is why your browser might not allow access to `crypto.subtle.digest`.
 
+### liveQueryUpdateThrottleTime
+`(optional, default: 0 = disabled)`
+
+Groups write-triggered live query updates to limit how often RxDB re-evaluates queries during write bursts. See [liveQueryUpdateThrottleTime](./rx-query.md#livequeryupdatethrottletime) for full documentation.
+
 ## Methods
 
 ### Observe with $
