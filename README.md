@@ -46,6 +46,11 @@
 Use the [quickstart](https://rxdb.info/quickstart.html), read the [documentation](https://rxdb.info/install.html) or explore the [example projects](https://github.com/pubkey/rxdb/tree/master/examples).
 
 
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=tj7AaDDHv2g"><img src="./docs-src/static/files/readme_video.png" alt="RxDB on Youtube" /></a>
+</p>
+
+
 <h2>
   <img height="16" width="16" src="./docs-src/static/files/icons/with-gradient/people.svg">&nbsp;&nbsp;Used by <b style="color: #e6008d;">many</b>
 </h2>
