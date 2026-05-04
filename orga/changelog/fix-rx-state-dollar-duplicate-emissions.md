@@ -1,1 +1,0 @@
-- FIX RxState `$` observable emitting duplicate and stale values on each write because both `_ownEmits$` and `collection.eventBulks$` triggered emissions for own-instance events

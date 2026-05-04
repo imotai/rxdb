@@ -1,1 +1,0 @@
-- FIX schema migration losing attachments when the migration strategy returns a new object, because `migrateDocumentData()` never restored `_attachments` after running the strategies while `_meta` and `_deleted` were restored

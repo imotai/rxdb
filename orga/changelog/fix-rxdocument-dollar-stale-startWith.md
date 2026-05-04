@@ -1,1 +1,0 @@
-- FIX `RxDocument.$` observable emitting stale document state when subscribed after the document was modified, because `startWith()` eagerly captured the latest data at observable creation time instead of at subscription time

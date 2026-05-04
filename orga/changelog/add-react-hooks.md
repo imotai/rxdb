@@ -1,2 +1,0 @@
-- ADD React `useRxDocument(collection, primaryKey)` hook for subscribing to a single document by primary key with live updates
-- ADD React `useReplicationStatus(replicationState)` hook that exposes `syncing`, `error`, `lastSyncedAt`, and `canceled` from replication observables

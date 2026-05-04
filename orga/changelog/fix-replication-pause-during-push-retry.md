@@ -1,1 +1,0 @@
-- FIX replication upstream marking documents as successfully pushed when the replication is paused during a push retry, because `masterWrite()` returns an empty conflicts array on pause and the upstream updates the meta instance and checkpoint without verifying the push actually succeeded, causing those documents to never be retried on resume

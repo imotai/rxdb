@@ -1,1 +1,0 @@
-- DOCS Mark `liveQueryUpdateThrottleTime` as a beta feature in the documentation

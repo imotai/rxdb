@@ -1,1 +1,0 @@
-- FIX `RxDatabase.password` being an enumerable property, which could leak the plaintext password through `Object.keys()`, object spreading, `Object.assign()`, or `JSON.stringify()` in logging and error reporting contexts

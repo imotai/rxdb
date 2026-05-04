@@ -1,1 +1,0 @@
-- FIX `RxState.get$()` (and the `field$` proxy accessor) emitting a stale value when subscribed after the state was modified, because `startWith()` eagerly captured the current value at observable creation time instead of at subscription time

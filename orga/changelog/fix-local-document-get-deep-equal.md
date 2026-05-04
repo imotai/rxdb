@@ -1,1 +1,0 @@
-- FIX `RxLocalDocument.get$()` on nested object/array paths emitting spurious values when unrelated document fields changed, because `distinctUntilChanged()` used reference equality which always fails for non-primitive values across document revisions

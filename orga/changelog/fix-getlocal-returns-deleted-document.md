@@ -1,1 +1,0 @@
-- FIX `getLocal()` returning a deleted local document from the document cache instead of `null`, causing inconsistent behavior between cache hits and storage lookups after a local document is removed

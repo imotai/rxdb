@@ -1,1 +1,0 @@
-- ADD dev-mode check (SC43) to prevent encrypted fields from being nested inside other encrypted fields. When a parent path is encrypted, the entire object is encrypted so child paths must not be listed separately in the `encrypted` array.

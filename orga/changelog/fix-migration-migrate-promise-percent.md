@@ -1,1 +1,0 @@
-- FIX `RxMigrationState.migratePromise()` returning `count.percent: 0` instead of `100` when the migration status is `DONE` and no migration was needed, which is inconsistent with the `updateStatus()` logic that correctly sets percent to `100` when total is `0`

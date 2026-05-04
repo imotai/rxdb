@@ -2,6 +2,8 @@
 
 > Master RxQuery in RxDB - find, update, remove documents using Mango syntax, chained queries, real-time observations, indexing, and more.
 
+import {BetaBlock} from '@site/src/components/beta-block';
+
 # RxQuery
 
 To find documents inside of an [RxCollection](./rx-collection.md), RxDB uses the RxQuery interface that handles all query operations: it serves as the main interface for fetching documents, relies on a MongoDB-like [Mango Query Syntax](https://github.com/cloudant/mango), and provides three types of queries: [find()](#find), [findOne()](#findOne) and [count()](#count). By caching and de-duplicating results, RxQuery ensures efficient in-memory handling, and when queries are observed or re-run, the [EventReduce algorithm](https://github.com/pubkey/event-reduce) speeds up updates for a fast real-time experience and queries that run more than once.
@@ -428,6 +430,33 @@ console.dir(results); // result-documents are now sorted
 Returns true if the given object is an instance of RxQuery. Returns false if not.
 ```js
 const is = isRxQuery(myObj);
+```
+
+## liveQueryUpdateThrottleTime
+
+<BetaBlock since="17.1.0" />
+
+When set to a positive number (milliseconds), write-triggered live query updates are grouped with [RxJS auditTime](https://rxjs.dev/api/operators/auditTime) before `_ensureEqual()` runs. This limits how often RxDB re-evaluates a live query during write bursts, which avoids repeated full-result rebuilds for queries with large result sets.
+
+The first query result is always emitted immediately so subscriptions still behave like a `BehaviorSubject` on startup. Only subsequent change-triggered reruns are throttled.
+
+The value can be set at the database level (applies to all collections) or overridden per collection via `liveQueryUpdateThrottleTime` in `addCollections`.
+
+```ts
+// set at database level - applies to all collections
+const db = await createRxDatabase({
+  name: 'heroesdb',
+  storage: getRxStorageLocalstorage(),
+  liveQueryUpdateThrottleTime: 100 // ms
+});
+
+// or override per collection
+const collections = await db.addCollections({
+  heroes: {
+    schema: heroSchema,
+    liveQueryUpdateThrottleTime: 200 // ms, overrides the database-level value
+  }
+});
 ```
 
 ## Design Decisions
