@@ -1,11 +1,12 @@
-# React
+# React RxDB integration
 
 > Integrate RxDB with React and React Native using dedicated hooks and context providers for reactive, real-time data binding in functional components.
 
 import {Tabs} from '@site/src/components/tabs';
 import {Steps} from '@site/src/components/steps';
+import {HeadlineWithIcon} from '@site/src/components/headline-with-icon';
 
-# React
+# <HeadlineWithIcon h1 icon={}>Using RxDB with React</HeadlineWithIcon>
 
 RxDB provides first-class support for both React and React Native via a dedicated React integration. This integration makes it possible to use RxDB inside functional components using React Context and hooks, without manually subscribing to observables or managing cleanup logic.
 

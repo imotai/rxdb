@@ -1332,7 +1332,9 @@ To play around, check out the full example of the RxDB [GraphQL replication with
 import {Steps} from '@site/src/components/steps';
 import {Tabs} from '@site/src/components/tabs';
 
-# HTTP Replication from a custom server to RxDB clients
+import {HeadlineWithIcon} from '@site/src/components/headline-with-icon';
+
+# <HeadlineWithIcon h1 icon={}>HTTP Replication from a custom server to RxDB clients</HeadlineWithIcon>
 
 While RxDB has a range of backend-specific replication plugins (like [GraphQL](./replication-graphql.md) or [Firestore](./replication-firestore.md)), the replication is built in a way to make it very easy to replicate data from a custom server to RxDB clients. 
 
@@ -2181,6 +2183,9 @@ The new documentation page has been moved to [here](./replication-webrtc.md)
 
 ## RxDB Server Replication
 
+import {HeadlineWithIcon} from '@site/src/components/headline-with-icon';
+
+# <HeadlineWithIcon h1 icon={}>RxDB Server Replication</HeadlineWithIcon>
 
 The *Server Replication Plugin* connects to the [replication](./replication.md) endpoint of an [RxDB Server Replication Endpoint](./rx-server.md#replication-endpoint) and replicates data between the client and the server.
 
@@ -2964,7 +2969,10 @@ According to the HTTP/1.1 specification (RFC 2616), browsers traditionally limit
 
 ## RxDB realtime Sync Engine for Local-First Apps
 
-# RxDB's realtime Sync Engine for Local-First Apps
+import { IconGear } from '@site/src/components/icons/gear';
+import { HeadlineWithIcon } from '@site/src/components/headline-with-icon';
+
+# <HeadlineWithIcon h1 icon={<IconGear />}>RxDB's realtime Sync Engine for Local-First Apps</HeadlineWithIcon>
 
 The RxDB Sync Engine provides the ability to sync the database state in **realtime** between the clients and the server.
 

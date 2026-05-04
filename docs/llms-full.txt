@@ -21,9 +21,12 @@ import {TriggerEvent} from '@site/src/components/trigger-event';
 import {Tabs} from '@site/src/components/tabs';
 import {NavbarDropdownSyncList} from '@site/src/components/navbar-dropdowns';
 
+import { IconQuickstart } from '@site/src/components/icons/quickstart';
+import { HeadlineWithIcon } from '@site/src/components/headline-with-icon';
+
 <TriggerEvent type="page_quickstart" value={0.2} maxPerUser={1} redditEventType="PageVisit" />
 
-# RxDB Quickstart
+# <HeadlineWithIcon h1 icon={<IconQuickstart />}>RxDB Quickstart</HeadlineWithIcon>
 
 Welcome to the RxDB Quickstart. Here we'll learn how to create a simple real-time app with the RxDB database that is able to store and query data persistently in a browser and does realtime updates to the UI on changes.
 
@@ -2741,7 +2744,10 @@ However, this method has a significant downside: regex queries often cannot leve
 
 ## RxStorage Layer - Choose the Perfect RxDB Storage for Every Use Case
 
-# RxStorage
+import { IconStorage } from '@site/src/components/icons/storage';
+import { HeadlineWithIcon } from '@site/src/components/headline-with-icon';
+
+# <HeadlineWithIcon h1 icon={<IconStorage />}>RxStorage</HeadlineWithIcon>
 
 RxDB is not a self-contained database. Instead the data is stored in an implementation of the [RxStorage interface](https://github.com/pubkey/rxdb/blob/master/src/types/rx-storage.interface.d.ts). This allows you to **switch out** the underlying data layer, depending on the JavaScript environment and performance requirements. For example you can use the SQLite storage for a capacitor app or you can use the LocalStorage RxStorage to store data in localstorage in a browser-based application. There are also storages for other JavaScript runtimes like Node.js, React-Native, NativeScript and more.
 
@@ -3246,7 +3252,9 @@ const database = await createRxDatabase({
 });
 ```
 
-The main thread and worker variants have different performance patterns. Running the database inside a WebWorker frees up the main thread to perform other tasks and enables faster synchronous file access, but passing messages between the main thread and the worker adds latency. Test both variants to determine which performs better for your specific use case.
+The main thread and worker variants have different performance patterns. Running the database inside a WebWorker frees up the main thread to perform other tasks and enables faster synchronous file access. This is why the worker can be noticeably faster for operations with many sequential reads, such as *Find 50 docs by ID*. 
+
+However, for many insert and bulk operations, the latency overhead of serializing queries and passing messages between the main thread and the worker will outweigh the raw storage performance gains. This means the Main Thread variant can appear faster in some benchmarks. Always test both variants to determine which performs better for your specific use case.
 
 <PerformanceChart title="OPFS Worker vs Main-Thread" data={PERFORMANCE_DATA_OPFS} metrics={PERFORMANCE_METRICS} />
 
@@ -6051,7 +6059,10 @@ You securely create an offline-first Electron application by maintaining strict 
 
 ## RxDB realtime Sync Engine for Local-First Apps
 
-# RxDB's realtime Sync Engine for Local-First Apps
+import { IconGear } from '@site/src/components/icons/gear';
+import { HeadlineWithIcon } from '@site/src/components/headline-with-icon';
+
+# <HeadlineWithIcon h1 icon={<IconGear />}>RxDB's realtime Sync Engine for Local-First Apps</HeadlineWithIcon>
 
 The RxDB Sync Engine provides the ability to sync the database state in **realtime** between the clients and the server.
 
@@ -6712,7 +6723,9 @@ RxDB supports partial sync patterns where you dynamically manage multiple replic
 import {Steps} from '@site/src/components/steps';
 import {Tabs} from '@site/src/components/tabs';
 
-# HTTP Replication from a custom server to RxDB clients
+import {HeadlineWithIcon} from '@site/src/components/headline-with-icon';
+
+# <HeadlineWithIcon h1 icon={}>HTTP Replication from a custom server to RxDB clients</HeadlineWithIcon>
 
 While RxDB has a range of backend-specific replication plugins (like [GraphQL](./replication-graphql.md) or [Firestore](./replication-firestore.md)), the replication is built in a way to make it very easy to replicate data from a custom server to RxDB clients. 
 
@@ -7037,6 +7050,9 @@ In this tutorial we only covered the basics of doing a HTTP replication between 
 
 ## RxDB Server Replication
 
+import {HeadlineWithIcon} from '@site/src/components/headline-with-icon';
+
+# <HeadlineWithIcon h1 icon={}>RxDB Server Replication</HeadlineWithIcon>
 
 The *Server Replication Plugin* connects to the [replication](./replication.md) endpoint of an [RxDB Server Replication Endpoint](./rx-server.md#replication-endpoint) and replicates data between the client and the server.
 
@@ -9657,7 +9673,9 @@ Appwrite natively provides robust WebSocket subscriptions allowing clients to re
 
 ## RxDB Server - Deploy Your Data
 
-# RxDB Server
+import {HeadlineWithIcon} from '@site/src/components/headline-with-icon';
+
+# <HeadlineWithIcon h1 icon={}>RxDB Server</HeadlineWithIcon>
 
 The RxDB Server Plugin makes it possible to spawn a server on top of a RxDB database that offers multiple types of endpoints for various usages. It can spawn basic CRUD REST endpoints or even realtime replication endpoints that can be used by the client devices to replicate data. The RxServer plugin is designed to be used in Node.js but you can also use it in Deno, Bun or the [Electron](./electron-database.md) "main" process. You can use it either as a **standalone server** or add it on top of an **existing http server** (like express) in nodejs.
 
@@ -11749,6 +11767,42 @@ const replicationPool = await replicateWebRTC(
     }
 );
 ```
+
+## FAQ
+
+<details>
+<summary>What is the difference between RxState and LocalDocuments?</summary>
+
+RxState can be synced.
+
+RxState is used for persisted on-page state like "is element toggled" while [LocalDocuments](./rx-local-document.md) are more for logic-state like user-settings.
+
+RxState is a complex object while LocalDocuments are a key-object store.
+
+LocalDocuments can be modified like any other RxDocument with conflict handling and incremental writes while RxState has its own API.
+
+RxState is mapped fully into memory while LocalDocuments are in memory only when needed. For big data, LocalDocuments should be used.
+
+RxState is stored per RxDatabase while LocalDocuments can be stored either per RxDatabase or RxCollection.
+</details>
+
+<details>
+<summary>When should I use RxState instead of Redux, Zustand, or Vuex?</summary>
+
+You should use RxState when you need state that automatically persists, synchronizes across browser tabs, or replicates between devices. While traditional in-memory stores require boilerplate replication logic and manual persistence, RxState handles these features out of the box.
+</details>
+
+<details>
+<summary>Why do I have to use a modifier function?</summary>
+
+Using a modifier function guarantees deterministic conflict resolution when multiple JavaScript realms (like WebWorkers or multiple browser tabs) attempt to update the state simultaneously. It ensures the state evaluates correctly even under concurrent modifications.
+</details>
+
+<details>
+<summary>Does RxState validate data against a schema?</summary>
+
+No, RxState is schema-less by default. Unlike standard RxDB collections, it accepts any complex JSON data without requiring a rigid schema definition, allowing for flexible state updates.
+</details>
 
 ---
 
@@ -23021,8 +23075,9 @@ This **chunk-based** or **scope-based** replication pattern keeps your local sto
 
 import {Steps} from '@site/src/components/steps';
 import {Tabs} from '@site/src/components/tabs';
+import {HeadlineWithIcon} from '@site/src/components/headline-with-icon';
 
-# React Native Database
+# <HeadlineWithIcon h1 icon={}>React Native Database</HeadlineWithIcon>
 
 If you are looking for a **React Native Database**, you usually want three things:
 1. **Persistence**: Store data locally on the device so the app works **[offline](./offline-first.md)**.
@@ -23241,12 +23296,13 @@ Check out the **[React Native Example Project](https://github.com/pubkey/rxdb/tr
 
 ---
 
-## React
+## React RxDB integration
 
 import {Tabs} from '@site/src/components/tabs';
 import {Steps} from '@site/src/components/steps';
+import {HeadlineWithIcon} from '@site/src/components/headline-with-icon';
 
-# React
+# <HeadlineWithIcon h1 icon={}>Using RxDB with React</HeadlineWithIcon>
 
 RxDB provides first-class support for both React and React Native via a dedicated React integration. This integration makes it possible to use RxDB inside functional components using React Context and hooks, without manually subscribing to observables or managing cleanup logic.
 

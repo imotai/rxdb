@@ -99,9 +99,12 @@ import {TriggerEvent} from '@site/src/components/trigger-event';
 import {Tabs} from '@site/src/components/tabs';
 import {NavbarDropdownSyncList} from '@site/src/components/navbar-dropdowns';
 
+import { IconQuickstart } from '@site/src/components/icons/quickstart';
+import { HeadlineWithIcon } from '@site/src/components/headline-with-icon';
+
 <TriggerEvent type="page_quickstart" value={0.2} maxPerUser={1} redditEventType="PageVisit" />
 
-# RxDB Quickstart
+# <HeadlineWithIcon h1 icon={<IconQuickstart />}>RxDB Quickstart</HeadlineWithIcon>
 
 Welcome to the RxDB Quickstart. Here we'll learn how to create a simple real-time app with the RxDB database that is able to store and query data persistently in a browser and does realtime updates to the UI on changes.
 
@@ -3217,11 +3220,50 @@ const replicationPool = await replicateWebRTC(
 );
 ```
 
+## FAQ
+
+<details>
+<summary>What is the difference between RxState and LocalDocuments?</summary>
+
+RxState can be synced.
+
+RxState is used for persisted on-page state like "is element toggled" while [LocalDocuments](./rx-local-document.md) are more for logic-state like user-settings.
+
+RxState is a complex object while LocalDocuments are a key-object store.
+
+LocalDocuments can be modified like any other RxDocument with conflict handling and incremental writes while RxState has its own API.
+
+RxState is mapped fully into memory while LocalDocuments are in memory only when needed. For big data, LocalDocuments should be used.
+
+RxState is stored per RxDatabase while LocalDocuments can be stored either per RxDatabase or RxCollection.
+</details>
+
+<details>
+<summary>When should I use RxState instead of Redux, Zustand, or Vuex?</summary>
+
+You should use RxState when you need state that automatically persists, synchronizes across browser tabs, or replicates between devices. While traditional in-memory stores require boilerplate replication logic and manual persistence, RxState handles these features out of the box.
+</details>
+
+<details>
+<summary>Why do I have to use a modifier function?</summary>
+
+Using a modifier function guarantees deterministic conflict resolution when multiple JavaScript realms (like WebWorkers or multiple browser tabs) attempt to update the state simultaneously. It ensures the state evaluates correctly even under concurrent modifications.
+</details>
+
+<details>
+<summary>Does RxState validate data against a schema?</summary>
+
+No, RxState is schema-less by default. Unlike standard RxDB collections, it accepts any complex JSON data without requiring a rigid schema definition, allowing for flexible state updates.
+</details>
+
 ---
 
 ## RxStorage Layer - Choose the Perfect RxDB Storage for Every Use Case
 
-# RxStorage
+import { IconStorage } from '@site/src/components/icons/storage';
+import { HeadlineWithIcon } from '@site/src/components/headline-with-icon';
+
+# <HeadlineWithIcon h1 icon={<IconStorage />}>RxStorage</HeadlineWithIcon>
 
 RxDB is not a self-contained database. Instead the data is stored in an implementation of the [RxStorage interface](https://github.com/pubkey/rxdb/blob/master/src/types/rx-storage.interface.d.ts). This allows you to **switch out** the underlying data layer, depending on the JavaScript environment and performance requirements. For example you can use the SQLite storage for a capacitor app or you can use the LocalStorage RxStorage to store data in localstorage in a browser-based application. There are also storages for other JavaScript runtimes like Node.js, React-Native, NativeScript and more.
 

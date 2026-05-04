@@ -1942,7 +1942,9 @@ const database = await createRxDatabase({
 });
 ```
 
-The main thread and worker variants have different performance patterns. Running the database inside a WebWorker frees up the main thread to perform other tasks and enables faster synchronous file access, but passing messages between the main thread and the worker adds latency. Test both variants to determine which performs better for your specific use case.
+The main thread and worker variants have different performance patterns. Running the database inside a WebWorker frees up the main thread to perform other tasks and enables faster synchronous file access. This is why the worker can be noticeably faster for operations with many sequential reads, such as *Find 50 docs by ID*. 
+
+However, for many insert and bulk operations, the latency overhead of serializing queries and passing messages between the main thread and the worker will outweigh the raw storage performance gains. This means the Main Thread variant can appear faster in some benchmarks. Always test both variants to determine which performs better for your specific use case.
 
 <PerformanceChart title="OPFS Worker vs Main-Thread" data={PERFORMANCE_DATA_OPFS} metrics={PERFORMANCE_METRICS} />
 
@@ -3187,7 +3189,10 @@ WebWorkers (and Worker Threads in Node.js) execute in entirely separate, wholly 
 
 ## RxStorage Layer - Choose the Perfect RxDB Storage for Every Use Case
 
-# RxStorage
+import { IconStorage } from '@site/src/components/icons/storage';
+import { HeadlineWithIcon } from '@site/src/components/headline-with-icon';
+
+# <HeadlineWithIcon h1 icon={<IconStorage />}>RxStorage</HeadlineWithIcon>
 
 RxDB is not a self-contained database. Instead the data is stored in an implementation of the [RxStorage interface](https://github.com/pubkey/rxdb/blob/master/src/types/rx-storage.interface.d.ts). This allows you to **switch out** the underlying data layer, depending on the JavaScript environment and performance requirements. For example you can use the SQLite storage for a capacitor app or you can use the LocalStorage RxStorage to store data in localstorage in a browser-based application. There are also storages for other JavaScript runtimes like Node.js, React-Native, NativeScript and more.
 

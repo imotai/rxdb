@@ -2,7 +2,10 @@
 
 > Replicate data in real-time with RxDB's offline-first Sync Engine. Learn about efficient syncing, conflict resolution, and advanced multi-tab support.
 
-# RxDB's realtime Sync Engine for Local-First Apps
+import { IconGear } from '@site/src/components/icons/gear';
+import { HeadlineWithIcon } from '@site/src/components/headline-with-icon';
+
+# <HeadlineWithIcon h1 icon={<IconGear />}>RxDB's realtime Sync Engine for Local-First Apps</HeadlineWithIcon>
 
 The RxDB Sync Engine provides the ability to sync the database state in **realtime** between the clients and the server.
 
