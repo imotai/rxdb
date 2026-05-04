@@ -47,7 +47,7 @@ Use the [quickstart](https://rxdb.info/quickstart.html), read the [documentation
 
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=tj7AaDDHv2g"><img src="./docs-src/static/files/readme_video.png" alt="RxDB on Youtube" /></a>
+  <a href="https://www.youtube.com/watch?v=tj7AaDDHv2g" target="_blank"><img src="./docs-src/static/files/readme_video.png" alt="RxDB on Youtube" /></a>
 </p>
 
 
