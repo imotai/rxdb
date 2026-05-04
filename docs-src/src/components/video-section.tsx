@@ -8,13 +8,19 @@ import { Slider } from './slider';
 
 export const YOUTUBE_VIDEO_MAIN: Omit<VideoBoxProps, 'dark'> = {
     videoId: 'tDWmfenF2AM',
-    title: 'The Easiest Way to Store Data',
-    duration: '04:28',
-    startAt: 8
+    title: 'RxDB in 100 Seconds',
+    duration: '01:28',
+    startAt: 0
 };
 
 const YOUTUBE_VIDEOS: Omit<VideoBoxProps, 'dark'>[] = [
     YOUTUBE_VIDEO_MAIN,
+    {
+        videoId: 'o86ZfBRRDo8',
+        title: 'The Easiest Way to Store Data',
+        duration: '04:28',
+        startAt: 8
+    },
     {
         videoId: 'qHWrooWyCYg',
         title: 'This solved a problem I\'ve had in Angular for years',
