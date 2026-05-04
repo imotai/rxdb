@@ -7,7 +7,7 @@ import { Slider } from './slider';
 
 
 export const YOUTUBE_VIDEO_MAIN: Omit<VideoBoxProps, 'dark'> = {
-    videoId: 'o86ZfBRRDo8',
+    videoId: 'tj7AaDDHv2g',
     title: 'RxDB in 100 Seconds',
     duration: '01:28',
     startAt: 0
