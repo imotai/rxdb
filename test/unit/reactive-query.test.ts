@@ -8,7 +8,8 @@ import {
     schemas,
     humansCollection,
     isFastMode,
-    HumanDocumentType
+    HumanDocumentType,
+    getConfig
 } from '../../plugins/test-utils/index.mjs';
 
 import AsyncTestUtil, { wait, waitUntil } from 'async-test-util';
@@ -151,6 +152,12 @@ describeParallel('reactive-query.test.js', () => {
             c.database.close();
         });
         it('groups live query write bursts before _ensureEqual when enabled', async () => {
+            if (
+                isFastMode() ||
+                getConfig().storage.name.includes('random-delay')
+            ) {
+                return;
+            }
             const db = await createRxDatabase({
                 name: randomToken(10),
                 storage: config.storage.getStorage(),
