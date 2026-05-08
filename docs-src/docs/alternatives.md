@@ -60,7 +60,7 @@ The firestore is the successor to the realtime database. The big difference is t
 
 The biggest difference to RxDB is that firebase products are only able to be used on top of the Firebase cloud hosted backend, which creates a vendor lock-in. RxDB can replicate with any self hosted CouchDB server or custom GraphQL endpoints. You can even replicate Firestore to RxDB with the [Firestore Replication Plugin](./replication-firestore.md).
 
-[Read more about why RxDB is a good alternative to Firebase](./articles/alternatives/firebase-alternative.md).
+[Read more about why RxDB is a good alternative to Firebase](./articles/firebase-realtime-database-alternative.md).
 
 ### Meteor
 

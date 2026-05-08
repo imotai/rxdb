@@ -24,7 +24,7 @@ On top of the core graph, the project ships SEA (Security, Encryption, Authoriza
 
 ## What is RxDB?
 
-[RxDB](https://rxdb.info/) (Reactive Database) is a [local-first](../../articles/local-first-future.md) NoSQL database for JavaScript. It runs in the browser, in Node.js, in Electron, and in React Native, persists data through a pluggable storage layer, and exposes documents and queries as RxJS observables for [reactivity](../../reactivity.md). The query language follows the MongoDB style and validates documents against [JSON Schema](../../rx-schema.md). Replication is handled by a small generic protocol that already has plugins for HTTP, GraphQL, CouchDB, Firestore, [WebRTC](../../replication-webrtc.md), and [Nostr](../../replication-nostr.md).
+[RxDB](https://rxdb.info/) (Reactive Database) is a [local-first](../../articles/local-first-future.md) NoSQL database for JavaScript. It runs in the browser, in Node.js, in Electron, and in React Native, persists data through a pluggable storage layer, and exposes documents and queries as RxJS observables for [reactivity](../../reactivity.md). The query language follows the MongoDB style and validates documents against [JSON Schema](../../rx-schema.md). Replication is handled by a small generic protocol that already has plugins for HTTP, GraphQL, CouchDB, Firestore, [WebRTC](../../replication-webrtc.md).
 
 ## Where GUN Falls Short
 
@@ -64,7 +64,6 @@ RxDB targets the same set of use cases (offline reads, real time updates, peer-t
 - **CRDT plugin**: For collaborative apps that need formal merge semantics, the [CRDT plugin](../../crdt.md) provides documented operations on counters, sets, and lists.
 - **Encryption**: The [encryption plugin](../../encryption.md) encrypts selected fields at rest using AES.
 - **WebRTC P2P replication**: The [WebRTC replication plugin](../../replication-webrtc.md) syncs collections directly between browser peers without a central data server.
-- **Nostr replication**: The [Nostr replication plugin](../../replication-nostr.md) uses the Nostr relay network as a transport, which gives you decentralized fan-out without running your own infrastructure.
 - **Conflict handling**: Custom conflict resolution is configured per collection through the [revisions and conflict handler API](../../transactions-conflicts-revisions.md).
 
 ## Code Sample: Schema and Reactive Query
@@ -140,14 +139,14 @@ replicationPool.error$.subscribe(err => {
 });
 ```
 
-Peers join a topic, the signaling server pairs them, and from there the data exchange runs directly between browsers. For a transport that does not require running your own signaling server, the [Nostr replication plugin](../../replication-nostr.md) routes updates through public Nostr relays.
+Peers join a topic, the signaling server pairs them, and from there the data exchange runs directly between browsers. For a transport that does not require running your own signaling server, the Nostr replication plugin routes updates through public Nostr relays.
 
 ## FAQ
 
 <details>
 <summary>Does RxDB support P2P like GUN?</summary>
 
-Yes. The [WebRTC replication plugin](../../replication-webrtc.md) syncs collections directly between browser peers, and the [Nostr replication plugin](../../replication-nostr.md) uses public Nostr relays as a transport. Both run without a central data server, and both reuse the same RxDB sync protocol used for HTTP and GraphQL backends.
+Yes. The [WebRTC replication plugin](../../replication-webrtc.md) syncs collections directly between browser peers. Both run without a central data server, and both reuse the same RxDB sync protocol used for HTTP and GraphQL backends.
 
 </details>
 
@@ -190,7 +189,7 @@ Each collection has a conflict handler. The default keeps the newer revision, an
 | Reactivity               | Subscriptions on nodes                   | RxJS observables on documents and queries                            |
 | Conflict resolution      | Built-in HAM merge, opaque rules         | Pluggable handler plus optional [CRDT plugin](../../crdt.md)            |
 | Encryption               | SEA module                               | [Encryption plugin](../../encryption.md), AES on selected fields        |
-| P2P transport            | Built-in WebSocket and WebRTC peers      | [WebRTC](../../replication-webrtc.md) and [Nostr](../../replication-nostr.md) plugins |
+| P2P transport            | Built-in WebSocket and WebRTC peers      | [WebRTC](../../replication-webrtc.md) plugins |
 | Server-based sync        | Optional relay peers                     | HTTP, GraphQL, CouchDB, Firestore, and custom backends               |
 | Storage backends         | IndexedDB, file, in-memory               | IndexedDB, OPFS, SQLite, Dexie, LocalStorage, Memory, and more       |
 | Tooling                  | Minimal, source-level debugging          | Devtools, logger, schema validator, migration runner                 |
@@ -198,13 +197,12 @@ Each collection has a conflict handler. The default keeps the newer revision, an
 
 ## Follow Up
 
-If GUN attracted you because of peer-to-peer sync but the debugging cost is slowing the project down, RxDB covers the same ground with a typed schema, documented merge semantics, and dedicated plugins for [WebRTC](../../replication-webrtc.md) and [Nostr](../../replication-nostr.md) replication. Start with the [RxDB Quickstart](../../quickstart.md), pick a storage that fits your runtime, and add a replication plugin once your local data model is stable.
+If GUN attracted you because of peer-to-peer sync but the debugging cost is slowing the project down, RxDB covers the same ground with a typed schema, documented merge semantics, and dedicated plugins for [WebRTC](../../replication-webrtc.md) replication. Start with the [RxDB Quickstart](../../quickstart.md), pick a storage that fits your runtime, and add a replication plugin once your local data model is stable.
 
 More resources:
 
 - [RxDB Sync Engine](../../replication.md)
 - [WebRTC Replication](../../replication-webrtc.md)
-- [Nostr Replication](../../replication-nostr.md)
 - [CRDT Plugin](../../crdt.md)
 - [Encryption Plugin](../../encryption.md)
 - [Conflicts and Revisions](../../transactions-conflicts-revisions.md)
